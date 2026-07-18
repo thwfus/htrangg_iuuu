@@ -1,0 +1,1402 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --intro-heart-size: 200px;
+  --intro-heart-half: 100px;
+}
+
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 45%, #fbc2eb 100%);
+}
+
+/* =========================================================
+   MÀN HÌNH CHUNG
+   ========================================================= */
+
+.app {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.68s ease,
+    transform 0.78s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.68s;
+}
+
+.screen.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.intro-screen.active.leaving {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(55px) scale(0.94);
+}
+
+/* =========================================================
+   MÀN HÌNH 1
+   ========================================================= */
+
+.container {
+  position: relative;
+  width: 90%;
+  max-width: 620px;
+  padding: 50px 30px;
+  text-align: center;
+}
+
+.intro-card {
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 20px 50px rgba(155, 0, 57, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.title {
+  margin-bottom: 20px;
+  color: #9d174d;
+  font-size: clamp(28px, 5vw, 48px);
+  text-shadow: 0 3px 10px rgba(255, 255, 255, 0.6);
+}
+
+.description {
+  margin-bottom: 20px;
+  color: #831843;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.intro-description {
+  position: relative;
+  z-index: 6;
+
+  margin-bottom: 0;
+  padding: 8px 14px;
+
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.72);
+}
+
+/* =========================================================
+   TRÁI TIM CSS
+   ========================================================= */
+
+.big-heart-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-heart-wrapper {
+  height: 250px;
+}
+
+.big-heart {
+  position: relative;
+
+  width: var(--heart-size);
+  height: var(--heart-size);
+
+  background: #ff1744;
+  transform: rotate(-45deg);
+
+  animation: heartbeat 1.08s infinite;
+  filter: drop-shadow(0 18px 22px rgba(255, 23, 68, 0.44));
+}
+
+.big-heart::before,
+.big-heart::after {
+  content: "";
+  position: absolute;
+
+  width: var(--heart-size);
+  height: var(--heart-size);
+
+  background: #ff1744;
+  border-radius: 50%;
+}
+
+.big-heart::before {
+  top: calc(var(--heart-half) * -1);
+  left: 0;
+}
+
+.big-heart::after {
+  top: 0;
+  left: var(--heart-half);
+}
+
+.intro-heart {
+  --heart-size: var(--intro-heart-size);
+  --heart-half: var(--intro-heart-half);
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+
+  15% {
+    transform: rotate(-45deg) scale(1.16);
+  }
+
+  30% {
+    transform: rotate(-45deg) scale(1);
+  }
+
+  45% {
+    transform: rotate(-45deg) scale(1.11);
+  }
+
+  60% {
+    transform: rotate(-45deg) scale(1);
+  }
+}
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.button-group {
+  width: 100%;
+  margin-top: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 18px;
+}
+
+.love-button {
+  min-width: 160px;
+  padding: 14px 25px;
+  margin-top: 20px;
+
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+
+  box-shadow: 0 10px 25px rgba(255, 65, 108, 0.35);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    filter 0.3s ease,
+    width 0.35s ease,
+    padding 0.35s ease,
+    font-size 0.35s ease,
+    opacity 0.35s ease;
+}
+
+.decline-button {
+  background: linear-gradient(135deg, #c471f5, #fa71cd);
+}
+
+.love-button:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(255, 65, 108, 0.45);
+  filter: brightness(1.08);
+}
+
+.love-button:active {
+  transform: translateY(0) scale(0.97);
+}
+
+#decline.decline-step-1 {
+  transform: scale(0.85) !important;
+}
+
+#accept.accept-step-1 {
+  transform: scale(1.15) !important;
+}
+
+#decline.decline-step-2 {
+  transform: scale(0.55) !important;
+}
+
+#accept.accept-step-2 {
+  transform: scale(1.35) !important;
+}
+
+#decline.decline-disappear {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0) !important;
+}
+
+.button-group.only-accept {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.button-group.only-accept #accept {
+  width: 100%;
+  max-width: none;
+  flex: 1 1 100%;
+
+  padding: 24px 30px;
+  font-size: 26px;
+
+  transform: scale(1) !important;
+}
+
+.next-button {
+  margin-top: 30px;
+  padding: 16px 46px;
+  font-size: 18px;
+}
+
+/* =========================================================
+   Ô ẢNH CHUNG
+   ========================================================= */
+
+.photo-slot {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #951442;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.64),
+    rgba(255, 255, 255, 0.24)
+  );
+
+  border: 3px dashed rgba(151, 20, 66, 0.44);
+  border-radius: 22px;
+
+  box-shadow:
+    0 15px 32px rgba(131, 24, 67, 0.19),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.photo-slot::after {
+  /* content: "♡"; */
+  position: absolute;
+  top: 8px;
+  right: 11px;
+
+  color: rgba(157, 23, 77, 0.58);
+  font-size: 20px;
+}
+
+.photo-slot img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.photo-slot img + span {
+  display: none;
+}
+
+/* =========================================================
+   MÀN HÌNH 2: BÊN NHAU ĐƯỢC X NGÀY
+   ========================================================= */
+
+.together-content {
+  width: min(720px, 95vw);
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(-120px) scale(0.93);
+}
+
+.together-screen.active .together-content {
+  animation: togetherDrop 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.days-title {
+  margin-bottom: 28px;
+
+  color: #8f123f;
+  font-size: clamp(32px, 5.5vw, 64px);
+  line-height: 1.16;
+
+  text-shadow:
+    0 4px 15px rgba(255, 255, 255, 0.76),
+    0 9px 32px rgba(157, 23, 77, 0.18);
+}
+
+#daysTogether {
+  color: #ff1744;
+  font-size: 1.14em;
+}
+
+.together-photo {
+  width: min(310px, 72vw);
+  aspect-ratio: 4 / 5;
+  margin: 0 auto;
+
+  transform: rotate(-2deg);
+}
+
+@keyframes togetherDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-120px) scale(0.93);
+  }
+
+  72% {
+    opacity: 1;
+    transform: translateY(12px) scale(1.015);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================================
+   MÀN HÌNH 3 VÀ 4: GALLERY QUANH TRÁI TIM
+   ========================================================= */
+
+.gallery-content {
+  width: min(1060px, 98vw);
+  height: min(900px, 96vh);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-title {
+  position: relative;
+  z-index: 7;
+
+  margin-bottom: 4px;
+
+  color: #8f123f;
+  font-size: clamp(44px, 7vw, 82px);
+  line-height: 1;
+
+  opacity: 0;
+  transform: translateY(-35px) scale(0.86);
+
+  text-shadow:
+    0 4px 14px rgba(255, 255, 255, 0.8),
+    0 10px 28px rgba(143, 18, 63, 0.22);
+}
+
+.gallery-screen.active .gallery-title {
+  animation: titleReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.us-title {
+  font-size: clamp(38px, 6vw, 72px);
+}
+
+.heart-gallery {
+  position: relative;
+  width: min(980px, 96vw);
+  height: min(660px, 72vh);
+}
+
+.gallery-heart-center {
+  position: absolute;
+  z-index: 2;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.gallery-heart {
+  --heart-size: 260px;
+  --heart-half: 130px;
+}
+
+.us-heart {
+  --heart-size: 290px;
+  --heart-half: 145px;
+}
+
+.gallery-photo {
+  position: absolute;
+  z-index: 5;
+
+  width: clamp(110px, 12vw, 150px);
+  aspect-ratio: 4 / 5;
+
+  opacity: 0;
+
+  transform: translate(-50%, -50%) scale(0.35)
+    rotate(var(--photo-rotation, 0deg));
+}
+
+.gallery-photo:hover {
+  z-index: 9;
+
+  box-shadow:
+    0 22px 45px rgba(131, 24, 67, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+/* 5 ảnh của màn hình "Em" */
+.her-photo-1 {
+  top: 25%;
+  left: 35%;
+  --photo-rotation: -10deg;
+  --photo-delay: 0.12s;
+}
+
+.her-photo-2 {
+  top: 23%;
+  left: 65%;
+  --photo-rotation: 9deg;
+  --photo-delay: 0.2s;
+}
+
+.her-photo-3 {
+  top: 52%;
+  left: 24%;
+  --photo-rotation: -7deg;
+  --photo-delay: 0.28s;
+}
+
+.her-photo-4 {
+  top: 52%;
+  left: 76%;
+  --photo-rotation: 7deg;
+  --photo-delay: 0.36s;
+}
+
+.her-photo-5 {
+  top: 80%;
+  left: 50%;
+  --photo-rotation: -2deg;
+  --photo-delay: 0.44s;
+}
+
+/* 8 ảnh của màn hình "Tôi và em" */
+.us-photo-1 {
+  top: 19%;
+  left: 35%;
+  --photo-rotation: -9deg;
+  --photo-delay: 0.08s;
+}
+
+.us-photo-2 {
+  top: 19%;
+  left: 65%;
+  --photo-rotation: 8deg;
+  --photo-delay: 0.14s;
+}
+
+.us-photo-3 {
+  top: 37%;
+  left: 23%;
+  --photo-rotation: -7deg;
+  --photo-delay: 0.2s;
+}
+
+.us-photo-4 {
+  top: 37%;
+  left: 77%;
+  --photo-rotation: 7deg;
+  --photo-delay: 0.26s;
+}
+
+.us-photo-5 {
+  top: 66%;
+  left: 22%;
+  --photo-rotation: 8deg;
+  --photo-delay: 0.32s;
+}
+
+.us-photo-6 {
+  top: 66%;
+  left: 78%;
+  --photo-rotation: -8deg;
+  --photo-delay: 0.38s;
+}
+
+.us-photo-7 {
+  top: 84%;
+  left: 38%;
+  --photo-rotation: -6deg;
+  --photo-delay: 0.44s;
+}
+
+.us-photo-8 {
+  top: 84%;
+  left: 62%;
+  --photo-rotation: 6deg;
+  --photo-delay: 0.5s;
+}
+
+.gallery-screen.active .gallery-photo {
+  animation: photoLand 0.74s cubic-bezier(0.22, 1, 0.36, 1)
+    var(--photo-delay, 0s) forwards;
+}
+
+.gallery-next-button {
+  position: relative;
+  z-index: 10;
+
+  margin-top: 0;
+
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.her-screen.active .gallery-next-button {
+  animation: buttonReveal 0.6s ease 0.65s forwards;
+}
+
+@keyframes titleReveal {
+  0% {
+    opacity: 0;
+    letter-spacing: 0.22em;
+    transform: translateY(-35px) scale(0.86);
+  }
+
+  100% {
+    opacity: 1;
+    letter-spacing: normal;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes photoLand {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.35)
+      rotate(calc(var(--photo-rotation, 0deg) - 18deg));
+  }
+
+  72% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08)
+      rotate(var(--photo-rotation, 0deg));
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1)
+      rotate(var(--photo-rotation, 0deg));
+  }
+}
+
+@keyframes buttonReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.love-message-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 130;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  /*
+     * Chỉ phủ một lớp hồng rất nhạt để vẫn thấy rõ
+     * nền và các trái tim đang bay phía sau.
+     */
+  background: rgba(255, 190, 205, 0.08);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.45s ease,
+    visibility 0.45s;
+}
+
+.love-message-modal.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.love-message-card {
+  position: relative;
+
+  width: min(760px, 92vw);
+  max-height: min(76vh, 720px);
+  overflow-y: auto;
+
+  padding: clamp(32px, 5vw, 58px);
+
+  background: rgba(255, 245, 249, 0.31);
+  border: 1px solid rgba(255, 255, 255, 0.66);
+  border-radius: 34px;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow:
+    0 24px 70px rgba(133, 20, 68, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.76);
+
+  opacity: 0;
+  transform: translateY(48px) scale(0.9);
+
+  transition:
+    opacity 0.55s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.love-message-modal.show .love-message-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.love-message-card h2 {
+  margin-bottom: 26px;
+
+  color: #d6336c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(32px, 6vw, 54px);
+  font-style: italic;
+  font-weight: 700;
+  text-align: center;
+
+  text-shadow:
+    0 3px 12px rgba(255, 255, 255, 0.82),
+    0 8px 28px rgba(214, 51, 108, 0.18);
+}
+
+.love-message-content {
+  color: #b4235a;
+  font-family: "Times New Roman", serif;
+  font-size: clamp(16px, 2.1vw, 20px);
+  font-style: italic;
+  line-height: 1.85;
+  text-align: left;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.68);
+}
+
+.love-message-content p + p {
+  margin-top: 20px;
+}
+
+.love-signature {
+  color: #d6336c;
+  font-weight: 700;
+  text-align: right;
+}
+
+.love-message-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+
+  width: 42px;
+  height: 42px;
+
+  color: #c2255c;
+  font-size: 30px;
+  line-height: 1;
+
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.love-message-close:hover {
+  background: rgba(255, 255, 255, 0.58);
+  transform: rotate(90deg) scale(1.06);
+}
+
+/* =========================================================
+   HIỆU ỨNG 1: TRÁI TIM LỚN BAY QUA MÀN HÌNH
+   ========================================================= */
+
+.transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.transition-overlay.play {
+  visibility: visible;
+}
+
+.heart-fly-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transition-heart-shell {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+
+  width: 300px;
+  height: 300px;
+
+  opacity: 0;
+}
+
+.heart-fly-overlay.play .transition-heart-shell {
+  animation: giantHeartFly 1.38s cubic-bezier(0.72, 0, 0.2, 1) forwards;
+}
+
+.transition-heart {
+  position: relative;
+
+  width: 300px;
+  height: 300px;
+
+  background: #ff1744;
+  transform: rotate(-45deg);
+
+  filter: drop-shadow(0 25px 45px rgba(152, 0, 48, 0.38));
+}
+
+.transition-heart::before,
+.transition-heart::after {
+  content: "";
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  background: #ff1744;
+  border-radius: 50%;
+}
+
+.transition-heart::before {
+  top: -150px;
+  left: 0;
+}
+
+.transition-heart::after {
+  top: 0;
+  left: 150px;
+}
+
+@keyframes giantHeartFly {
+  0% {
+    opacity: 0;
+    transform: translate(-125vw, 35vh) rotate(-20deg) scale(0.28);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  48% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(8deg) scale(4.8);
+  }
+
+  61% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(8deg) scale(5.15);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(120vw, -42vh) rotate(28deg) scale(0.42);
+  }
+}
+
+/* =========================================================
+   HIỆU ỨNG 2: ÁNH SÁNG NỞ + TRÁI TIM NHỎ BUNG RA
+   ========================================================= */
+
+.bloom-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bloom-circle {
+  width: 120px;
+  height: 120px;
+
+  opacity: 0;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 181, 201, 0.96) 34%,
+    rgba(255, 75, 126, 0.93) 70%,
+    rgba(255, 23, 68, 0) 100%
+  );
+
+  border-radius: 50%;
+}
+
+.bloom-overlay.play .bloom-circle {
+  animation: bloomExpand 1.12s ease-in-out forwards;
+}
+
+.bloom-mini-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  color: #ff1744;
+  font-size: 48px;
+
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+}
+
+.bloom-overlay.play .bloom-mini-heart {
+  animation: miniHeartBurst 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.bloom-heart-1 {
+  --burst-x: -38vw;
+  --burst-y: -30vh;
+  --burst-rotate: -45deg;
+}
+
+.bloom-heart-2 {
+  --burst-x: -10vw;
+  --burst-y: -44vh;
+  --burst-rotate: 24deg;
+}
+
+.bloom-heart-3 {
+  --burst-x: 22vw;
+  --burst-y: -39vh;
+  --burst-rotate: -18deg;
+}
+
+.bloom-heart-4 {
+  --burst-x: 41vw;
+  --burst-y: -10vh;
+  --burst-rotate: 38deg;
+}
+
+.bloom-heart-5 {
+  --burst-x: 36vw;
+  --burst-y: 29vh;
+  --burst-rotate: -30deg;
+}
+
+.bloom-heart-6 {
+  --burst-x: 8vw;
+  --burst-y: 44vh;
+  --burst-rotate: 18deg;
+}
+
+.bloom-heart-7 {
+  --burst-x: -25vw;
+  --burst-y: 38vh;
+  --burst-rotate: -38deg;
+}
+
+.bloom-heart-8 {
+  --burst-x: -43vw;
+  --burst-y: 8vh;
+  --burst-rotate: 26deg;
+}
+
+@keyframes bloomExpand {
+  0% {
+    opacity: 0;
+    transform: scale(0.15);
+  }
+
+  34% {
+    opacity: 1;
+  }
+
+  65% {
+    opacity: 1;
+    transform: scale(18);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(24);
+  }
+}
+
+@keyframes miniHeartBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2) rotate(0);
+  }
+
+  24% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(
+        calc(-50% + var(--burst-x)),
+        calc(-50% + var(--burst-y))
+      )
+      scale(1.55) rotate(var(--burst-rotate));
+  }
+}
+
+/* =========================================================
+   NỀN TRÁI TIM BAY
+   ========================================================= */
+
+.heart-background {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -100px;
+
+  color: rgba(255, 255, 255, 0.75);
+
+  animation-name: floatUp;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.floating-heart:nth-child(1) {
+  left: 5%;
+  font-size: 28px;
+  animation-duration: 8s;
+  animation-delay: 0s;
+}
+
+.floating-heart:nth-child(2) {
+  left: 15%;
+  font-size: 50px;
+  animation-duration: 12s;
+  animation-delay: 2s;
+}
+
+.floating-heart:nth-child(3) {
+  left: 25%;
+  font-size: 22px;
+  animation-duration: 9s;
+  animation-delay: 5s;
+}
+
+.floating-heart:nth-child(4) {
+  left: 35%;
+  font-size: 40px;
+  animation-duration: 14s;
+  animation-delay: 1s;
+}
+
+.floating-heart:nth-child(5) {
+  left: 45%;
+  font-size: 30px;
+  animation-duration: 10s;
+  animation-delay: 6s;
+}
+
+.floating-heart:nth-child(6) {
+  left: 55%;
+  font-size: 55px;
+  animation-duration: 13s;
+  animation-delay: 3s;
+}
+
+.floating-heart:nth-child(7) {
+  left: 65%;
+  font-size: 25px;
+  animation-duration: 8s;
+  animation-delay: 4s;
+}
+
+.floating-heart:nth-child(8) {
+  left: 75%;
+  font-size: 45px;
+  animation-duration: 11s;
+  animation-delay: 0s;
+}
+
+.floating-heart:nth-child(9) {
+  left: 85%;
+  font-size: 32px;
+  animation-duration: 15s;
+  animation-delay: 5s;
+}
+
+.floating-heart:nth-child(10) {
+  left: 93%;
+  font-size: 24px;
+  animation-duration: 9s;
+  animation-delay: 2s;
+}
+
+.floating-heart:nth-child(11) {
+  left: 10%;
+  font-size: 36px;
+  animation-duration: 13s;
+  animation-delay: 8s;
+}
+
+.floating-heart:nth-child(12) {
+  left: 24%;
+  font-size: 12px;
+  animation-duration: 24s;
+  animation-delay: 12s;
+}
+
+.floating-heart:nth-child(13) {
+  left: 60%;
+  font-size: 38px;
+  animation-duration: 12s;
+  animation-delay: 9s;
+}
+
+.floating-heart:nth-child(14) {
+  left: 80%;
+  font-size: 26px;
+  animation-duration: 9s;
+  animation-delay: 6s;
+}
+
+.floating-heart:nth-child(15) {
+  left: 23%;
+  font-size: 23px;
+  animation-duration: 20s;
+  animation-delay: 6s;
+}
+
+.floating-heart:nth-child(16) {
+  left: 90%;
+  font-size: 26px;
+  animation-duration: 14s;
+  animation-delay: 6s;
+}
+
+.floating-heart:nth-child(17) {
+  left: 50%;
+  font-size: 13px;
+  animation-duration: 9s;
+  animation-delay: 6s;
+}
+
+.floating-heart:nth-child(18) {
+  left: 66%;
+  font-size: 60px;
+  animation-duration: 14s;
+  animation-delay: 7s;
+}
+
+.floating-heart:nth-child(19) {
+  left: 56%;
+  font-size: 36px;
+  animation-duration: 9s;
+  animation-delay: 6s;
+}
+
+.floating-heart:nth-child(20) {
+  left: -8%;
+  font-size: 44px;
+  animation-duration: 10s;
+  animation-delay: 12s;
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: -100px;
+    opacity: 0;
+    transform: translateX(0) rotate(0deg) scale(0.7);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(50px) rotate(180deg) scale(1);
+  }
+
+  90% {
+    opacity: 0.8;
+  }
+
+  100% {
+    bottom: 110vh;
+    opacity: 0;
+    transform: translateX(-50px) rotate(360deg) scale(1.3);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 760px) {
+  :root {
+    --intro-heart-size: 118px;
+    --intro-heart-half: 59px;
+  }
+
+  .screen {
+    padding: 12px;
+  }
+
+  .container {
+    width: 94%;
+    padding: 38px 18px;
+  }
+
+  .intro-heart-wrapper {
+    height: 190px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .love-button {
+    width: 100%;
+    max-width: 290px;
+  }
+
+  .days-title {
+    margin-bottom: 20px;
+    font-size: clamp(30px, 9vw, 45px);
+  }
+
+  .together-photo {
+    width: min(245px, 68vw);
+  }
+
+  .next-button {
+    width: auto;
+    min-width: 190px;
+  }
+
+  .gallery-content {
+    width: 100%;
+    height: 96vh;
+  }
+
+  .gallery-title {
+    margin-top: 3vh;
+    font-size: clamp(40px, 13vw, 61px);
+  }
+
+  .us-title {
+    font-size: clamp(35px, 11vw, 53px);
+  }
+
+  .heart-gallery {
+    width: 100vw;
+    height: min(610px, 72vh);
+  }
+
+  .gallery-heart {
+    --heart-size: 150px;
+    --heart-half: 75px;
+  }
+
+  .us-heart {
+    --heart-size: 165px;
+    --heart-half: 82.5px;
+  }
+
+  .gallery-photo {
+    width: clamp(70px, 21vw, 93px);
+    border-width: 2px;
+    border-radius: 15px;
+    font-size: 10px;
+  }
+
+  .her-photo-1 {
+    top: 26%;
+    left: 31%;
+  }
+
+  .her-photo-2 {
+    top: 24%;
+    left: 69%;
+  }
+
+  .her-photo-3 {
+    top: 53%;
+    left: 18%;
+  }
+
+  .her-photo-4 {
+    top: 53%;
+    left: 82%;
+  }
+
+  .her-photo-5 {
+    top: 80%;
+    left: 50%;
+  }
+
+  .us-photo-1 {
+    top: 18%;
+    left: 31%;
+  }
+
+  .us-photo-2 {
+    top: 18%;
+    left: 69%;
+  }
+
+  .us-photo-3 {
+    top: 37%;
+    left: 15%;
+  }
+
+  .us-photo-4 {
+    top: 37%;
+    left: 85%;
+  }
+
+  .us-photo-5 {
+    top: 65%;
+    left: 14%;
+  }
+
+  .us-photo-6 {
+    top: 65%;
+    left: 86%;
+  }
+
+  .us-photo-7 {
+    top: 84%;
+    left: 32%;
+  }
+
+  .us-photo-8 {
+    top: 84%;
+    left: 68%;
+  }
+
+  .gallery-next-button {
+    margin-top: -4px;
+  }
+
+  .transition-heart-shell,
+  .transition-heart,
+  .transition-heart::before,
+  .transition-heart::after {
+    width: 180px;
+    height: 180px;
+  }
+
+  .transition-heart::before {
+    top: -90px;
+  }
+
+  .transition-heart::after {
+    left: 90px;
+  }
+}
+
+@media (max-height: 690px) and (min-width: 761px) {
+  .intro-card {
+    transform: scale(0.86);
+  }
+
+  .together-content {
+    transform-origin: center;
+  }
+
+  .together-screen.active .together-content {
+    animation-name: togetherDropCompact;
+  }
+
+  .gallery-content {
+    transform: scale(0.84);
+  }
+
+  @keyframes togetherDropCompact {
+    0% {
+      opacity: 0;
+      transform: translateY(-100px) scale(0.78);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(0.84);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
