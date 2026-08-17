@@ -1,535 +1,681 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>For My Love ❤️</title>
+    
+    <script>
+        const navigation =
+            performance.getEntriesByType("navigation")[0];
 
-    <link rel="stylesheet" href="style1.css" />
-  </head>
+        const isReload = navigation
+            ? navigation.type === "reload"
+            : performance.navigation?.type === 1;
 
-  <body>
+        if (isReload) {
+            window.location.replace("./login.html");
+        }
+    </script>
+
+    <link rel="stylesheet" href="style1.css">
+</head>
+
+<body>
+
     <!-- Nền trái tim luôn chạy và không bị tải lại khi đổi màn hình -->
     <div class="heart-background" aria-hidden="true">
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
-      <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
+        <span class="floating-heart">♥</span>
     </div>
 
     <!-- Hiệu ứng chuyển từ màn hình số ngày sang màn hình "Em" -->
     <div
-      id="heartFlyTransition"
-      class="transition-overlay heart-fly-overlay"
-      aria-hidden="true"
+        id="heartFlyTransition"
+        class="transition-overlay heart-fly-overlay"
+        aria-hidden="true"
     >
-      <div class="transition-heart-shell">
-        <div class="transition-heart"></div>
-      </div>
+        <div class="transition-heart-shell">
+            <div class="transition-heart"></div>
+        </div>
     </div>
 
     <!-- Hiệu ứng chuyển từ màn hình "Em" sang "Tôi và em" -->
     <div
-      id="bloomTransition"
-      class="transition-overlay bloom-overlay"
-      aria-hidden="true"
+        id="bloomTransition"
+        class="transition-overlay bloom-overlay"
+        aria-hidden="true"
     >
-      <div class="bloom-circle"></div>
+        <div class="bloom-circle"></div>
 
-      <span class="bloom-mini-heart bloom-heart-1">♥</span>
-      <span class="bloom-mini-heart bloom-heart-2">♥</span>
-      <span class="bloom-mini-heart bloom-heart-3">♥</span>
-      <span class="bloom-mini-heart bloom-heart-4">♥</span>
-      <span class="bloom-mini-heart bloom-heart-5">♥</span>
-      <span class="bloom-mini-heart bloom-heart-6">♥</span>
-      <span class="bloom-mini-heart bloom-heart-7">♥</span>
-      <span class="bloom-mini-heart bloom-heart-8">♥</span>
+        <span class="bloom-mini-heart bloom-heart-1">♥</span>
+        <span class="bloom-mini-heart bloom-heart-2">♥</span>
+        <span class="bloom-mini-heart bloom-heart-3">♥</span>
+        <span class="bloom-mini-heart bloom-heart-4">♥</span>
+        <span class="bloom-mini-heart bloom-heart-5">♥</span>
+        <span class="bloom-mini-heart bloom-heart-6">♥</span>
+        <span class="bloom-mini-heart bloom-heart-7">♥</span>
+        <span class="bloom-mini-heart bloom-heart-8">♥</span>
     </div>
 
     <main class="app">
-      <!-- =====================================================
+
+        <!-- =====================================================
              MÀN HÌNH 1
              ===================================================== -->
-      <section id="introScreen" class="screen intro-screen active">
-        <div class="container intro-card">
-          <h1 class="title">For My Love ❤️</h1>
+        <section id="introScreen" class="screen intro-screen active">
+            <div class="container intro-card">
+                <h1 class="title">For My Love ❤️</h1>
 
-          <p class="description intro-description">Bé bên anh đêm nay nha 🥺</p>
+                <p class="description intro-description">
+                    Bé bên anh đêm nay nha 🥺
+                </p>
 
-          <div class="big-heart-wrapper intro-heart-wrapper">
-            <div class="big-heart intro-heart"></div>
-          </div>
+                <div class="big-heart-wrapper intro-heart-wrapper">
+                    <div class="big-heart intro-heart"></div>
+                </div>
 
-          <div class="button-group" id="buttonGroup">
-            <button
-              id="accept"
-              class="love-button"
-              type="button"
-              onclick="showTogetherScreen()"
-            >
-              Okiii
-            </button>
+                <div class="button-group" id="buttonGroup">
+                    <button
+                        id="accept"
+                        class="love-button"
+                        type="button"
+                        onclick="showTogetherScreen()"
+                    >
+                        Okiii
+                    </button>
 
-            <button
-              id="decline"
-              class="love-button decline-button"
-              type="button"
-              onclick="handleDecline()"
-            >
-              Hong má
-            </button>
-          </div>
-        </div>
-      </section>
+                    <button
+                        id="decline"
+                        class="love-button decline-button"
+                        type="button"
+                        onclick="handleDecline()"
+                    >
+                        Hong má
+                    </button>
+                </div>
+            </div>
+        </section>
 
-      <!-- =====================================================
+        <!-- =====================================================
              MÀN HÌNH 2: SỐ NGÀY + 1 ẢNH
              ===================================================== -->
-      <section id="togetherScreen" class="screen together-screen">
-        <div class="together-content">
-          <h2 class="days-title">
-            Mình bên nhau được
-            <span id="daysTogether">...</span>
-            ngày gùi đó ❤️
-          </h2>
+        <section id="togetherScreen" class="screen together-screen">
+            <div class="together-content">
+                <h2 class="days-title">
+                    Mình bên nhau được
+                    <span id="daysTogether">...</span>
+                    ngày gùi đó ❤️
+                </h2>
 
-          <div class="photo-slot together-photo">
-            <img src="a2.jpg" alt="First promise" title="First promise đóooo" />
-          </div>
+                <div class="photo-slot together-photo">
+                    <img src="a2.jpg" alt="First promise" title="First promise đóooo">
+                </div>
 
-          <button
-            class="love-button next-button"
-            type="button"
-            onclick="showHerScreen()"
-          >
-            Tiếp theo
-          </button>
-        </div>
-      </section>
+                <button
+                    class="love-button next-button"
+                    type="button"
+                    onclick="showHerScreen()"
+                >
+                    Tiếp theo
+                </button>
+            </div>
+        </section>
 
-      <!-- =====================================================
+        <!-- =====================================================
              MÀN HÌNH 3: EM + 5 ẢNH TRÊN VIỀN TRÁI TIM
              ===================================================== -->
-      <section id="herScreen" class="screen gallery-screen her-screen">
-        <div class="gallery-content">
-          <h2 class="gallery-title">Em</h2>
+        <section id="herScreen" class="screen gallery-screen her-screen">
+            <div class="gallery-content">
+                <h2 class="gallery-title">Em</h2>
 
-          <div class="heart-gallery her-gallery">
-            <div class="gallery-heart-center">
-              <div class="big-heart gallery-heart her-heart"></div>
+                <div class="heart-gallery her-gallery">
+
+                    <div class="gallery-heart-center">
+                        <div class="big-heart gallery-heart her-heart"></div>
+                    </div>
+
+                    <div class="photo-slot gallery-photo her-photo-1">
+                        <img src="dautien.jpg" alt="Ảnh em " title="Ảnh em đầu tiên gửi anhhh">
+                    </div>
+
+                    <div class="photo-slot gallery-photo her-photo-2">
+                        <img src="662d5db2-2256-4461-bcf0-db515085192f.jpg" alt="Ảnh em" title="Ẻm bị chụp lénnn">
+                    </div>
+
+                    <div class="photo-slot gallery-photo her-photo-3">
+                        <img src="a4.jpg" alt="Ảnh em" title="Móc khóa tui tặng ẻm nèee">
+                    </div>
+
+                    <div class="photo-slot gallery-photo her-photo-4">
+                        <img src="cd3a08f2-8665-4221-a104-dbedc797b037.jpg" alt="Ảnh em" title="Lần đầu ẻm đeo kínhhh">
+                    </div>
+
+                    <div class="photo-slot gallery-photo her-photo-5">
+                        <img src="cf243f04-c26e-475d-adb8-ab019002cf00.jpg" alt="Ảnh em" title="Em và hoa">
+                    </div>
+                </div>
+
+                <button
+                    class="love-button next-button gallery-next-button"
+                    type="button"
+                    onclick="showUsScreen()"
+                >
+                    Tiếp theo
+                </button>
             </div>
+        </section>
 
-            <!--
-                        Mỗi ô ảnh:
-                        - Xóa <span>...</span>
-                        - Thay bằng <img src="images/em-1.jpg" alt="Ảnh Em 1">
-                    -->
-
-            <div class="photo-slot gallery-photo her-photo-1">
-              <img
-                src="dautien.jpg"
-                alt="Ảnh em "
-                title="Ảnh em đầu tiên gửi anhhh"
-              />
-            </div>
-
-            <div class="photo-slot gallery-photo her-photo-2">
-              <img
-                src="662d5db2-2256-4461-bcf0-db515085192f.jpg"
-                alt="Ảnh em"
-                title="Ẻm bị chụp lénnn"
-              />
-            </div>
-
-            <div class="photo-slot gallery-photo her-photo-3">
-              <img
-                src="a4.jpg"
-                alt="Ảnh em"
-                title="Móc khóa tui tặng ẻm nèee"
-              />
-            </div>
-
-            <div class="photo-slot gallery-photo her-photo-4">
-              <img
-                src="cd3a08f2-8665-4221-a104-dbedc797b037.jpg"
-                alt="Ảnh em"
-                title="Lần đầu ẻm đeo kínhhh"
-              />
-            </div>
-
-            <div class="photo-slot gallery-photo her-photo-5">
-              <img
-                src="cf243f04-c26e-475d-adb8-ab019002cf00.jpg"
-                alt="Ảnh em"
-                title="Em và hoa"
-              />
-            </div>
-          </div>
-
-          <button
-            class="love-button next-button gallery-next-button"
-            type="button"
-            onclick="showUsScreen()"
-          >
-            Tiếp theo
-          </button>
-        </div>
-      </section>
-
-      <!-- =====================================================
+        <!-- =====================================================
              MÀN HÌNH 4: TÔI VÀ EM + 8 ẢNH
              ===================================================== -->
-      <section id="usScreen" class="screen gallery-screen us-screen">
-        <div class="gallery-content">
-          <h2 class="gallery-title us-title">Tôi và em</h2>
+        <section id="usScreen" class="screen gallery-screen us-screen">
+            <div class="gallery-content">
+                <h2 class="gallery-title us-title">Tôi và em</h2>
 
-          <div class="heart-gallery us-gallery">
-            <div class="gallery-heart-center">
-              <div class="big-heart gallery-heart us-heart"></div>
+                <div class="heart-gallery us-gallery">
+
+                    <div class="gallery-heart-center">
+                        <div class="big-heart gallery-heart us-heart"></div>
+                    </div>
+
+
+                    <div class="photo-slot gallery-photo us-photo-1">
+                        <img src="a3.jpg" alt="Ảnh chung" title="First date sau tỏ tình nèee">
+                    </div>
+
+                    <div class="photo-slot gallery-photo us-photo-2">
+                        <img src="209292cf-4794-440d-9819-57fc24f0d7cf.jpg" alt="Ảnh chung" title="Hun nèee">
+                    </div>
+
+                    <div class="photo-slot gallery-photo us-photo-3">
+                        <img src="44c5f015-5ad0-41f0-a0a7-5d3019af51b7.jpg" alt="Ảnh chung" title="Ẻm nựng tuiii">
+                    </div>
+
+                    <div class="photo-slot gallery-photo us-photo-4">
+                        <img src="9b5c0d5e-723a-4a5e-8824-6b41436fcfe7.jpg" alt="Ảnh chung" title="Bĩu môi nèee">
+                    </div>
+
+                    <div class="photo-slot gallery-photo us-photo-5">
+                        <img src="23e54505-8c1c-465c-ba86-832a3fc9edaf.jpg" alt="Ảnh chung" title="Ẻm công khai tuiii">
+                    </div>
+
+                    <div class="photo-slot gallery-photo us-photo-6">
+                        <img src="5c88f73f-479a-4f81-885c-f7e18bc9d49d.jpg" alt="Ảnh chung" title="2 con Ma Kết chu mỏ">
+                    </div>
+
+                    <div class="photo-slot gallery-photo us-photo-7">
+                        <img src="8138ba08-a590-46f3-830a-bc1590fd887f.jpg" alt="Ảnh chung" title="Nhéo má nèee">
+                    </div>
+
+                    <div class="photo-slot gallery-photo us-photo-8">
+                        <img src="5963f45f-7cfc-426f-ae60-af5099c9a7ec.jpg" alt="Ảnh chung" title="Ăng nhăng nhănggg">
+                    </div>
+                </div>
+
+                <button
+                    class="love-button final-message-button"
+                    type="button"
+                    onclick="openLoveMessage()"
+                >
+                    Mở lời nhắn 💌
+                </button>
+
             </div>
+        </section>
 
-            <!--
-                        Mỗi ô ảnh:
-                        - Xóa <span>...</span>
-                        - Thay bằng <img src="images/chung-1.jpg" alt="Ảnh chung 1">
-                    -->
+        <!-- =====================================================
+             NHỮNG LỜI NHẮN MỖI NGÀY 18
+             Mỗi tháng bạn chỉ cần copy một <section class="love-message-page">,
+             đổi data-date và sửa nội dung bên trong.
+             ===================================================== -->
+        <div
+            id="loveMessageModal"
+            class="love-message-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="loveMessageTitle"
+            aria-hidden="true"
+            onclick="closeLoveMessageOnBackdrop(event)"
+        >
+            <article class="love-message-card">
+                <button
+                    class="love-message-close"
+                    type="button"
+                    aria-label="Đóng lời nhắn"
+                    onclick="closeLoveMessage()"
+                >
+                    ×
+                </button>
 
-            <div class="photo-slot gallery-photo us-photo-1">
-              <img
-                src="a3.jpg"
-                alt="Ảnh chung"
-                title="First date sau tỏ tình nèee"
-              />
-            </div>
+                <header class="love-message-header">
+                    <p
+                        id="messagePageDate"
+                        class="love-message-date"
+                    ></p>
+                </header>
 
-            <div class="photo-slot gallery-photo us-photo-2">
-              <img
-                src="209292cf-4794-440d-9819-57fc24f0d7cf.jpg"
-                alt="Ảnh chung"
-                title="Hun nèee"
-              />
-            </div>
+                <div class="love-message-pages">
 
-            <div class="photo-slot gallery-photo us-photo-3">
-              <img
-                src="44c5f015-5ad0-41f0-a0a7-5d3019af51b7.jpg"
-                alt="Ảnh chung"
-                title="Ẻm nựng tuiii"
-              />
-            </div>
+                    <!-- LỜI NHẮN THÁNG 1 -->
+                    <section
+                        class="love-message-page active"
+                        data-date="18.07.2026"
+                    >
+                        <div class="love-message-content">
+                            <p>
+                                Gửi htrangg của anh,
+                            </p>
 
-            <div class="photo-slot gallery-photo us-photo-4">
-              <img
-                src="9b5c0d5e-723a-4a5e-8824-6b41436fcfe7.jpg"
-                alt="Ảnh chung"
-                title="Bĩu môi nèee"
-              />
-            </div>
+                            <p>
+                                Hôm nay là anni 1 tháng của hai đứa, nhưng vì cả hai đều bận nên anh chỉ có thể làm cái này cho
+                                em, anh mong em ngày càng khỏe mạnh hơn, xinh đẹp hơn và yêu bản thân em nhaaa.
+                            </p>
 
-            <div class="photo-slot gallery-photo us-photo-5">
-              <img
-                src="23e54505-8c1c-465c-ba86-832a3fc9edaf.jpg"
-                alt="Ảnh chung"
-                title="Ẻm công khai tuiii"
-              />
-            </div>
+                            <p>
+                                Anh và em sẽ bên nhau thật lâu, để anh chăm sóc cho em mãi về sau.
+                            </p>
 
-            <div class="photo-slot gallery-photo us-photo-6">
-              <img
-                src="5c88f73f-479a-4f81-885c-f7e18bc9d49d.jpg"
-                alt="Ảnh chung"
-                title="2 con Ma Kết chu mỏ"
-              />
-            </div>
+                            <p class="love-signature">
+                                Thương em thật nhiều, embe của anh ❤️
+                            </p>
+                        </div>
+                    </section>
 
-            <div class="photo-slot gallery-photo us-photo-7">
-              <img
-                src="8138ba08-a590-46f3-830a-bc1590fd887f.jpg"
-                alt="Ảnh chung"
-                title="Nhéo má nèee"
-              />
-            </div>
+                    <section
+                        class="love-message-page"
+                        data-date="18.08.2026"
+                    >
+                        <div class="love-message-content">
+                            <p>Gửi htrangg của anh,</p>
 
-            <div class="photo-slot gallery-photo us-photo-8">
-              <img
-                src="5963f45f-7cfc-426f-ae60-af5099c9a7ec.jpg"
-                alt="Ảnh chung"
-                title="Ăng nhăng nhănggg"
-              />
-            </div>
-          </div>
+                            <p>
+                                Tháng này anh đã chuẩn bị kĩ hơn chút xíu rồi nè, nhưng lại không có nhiều thời gian để chỉn chu cái web nựa.
+                                Vào dịp 2 đứa quen nhau được 2 tháng, anh mong em lun khỏe mạnh, học hành thật giỏi và có thật nhiều niềm vui bên anh nèeeee.
+                            </p>
 
-          <button
-            class="love-button final-message-button"
-            type="button"
-            onclick="openLoveMessage()"
-          >
-            Mở lời nhắn 💌
-          </button>
+                            <p class="love-signature">
+                                Em bé của anh ngoan lắm ó, mãi iu em bé cụa anhhhh ❤️
+                            </p>
+                        </div>
+                    </section>
+                   
+
+                </div>
+
+                <nav class="love-message-pagination" aria-label="Phân trang lời nhắn">
+                    <button
+                        id="messagePrevButton"
+                        class="message-page-button"
+                        type="button"
+                        onclick="changeLoveMessagePage(-1)"
+                    >
+                        ← Cũ hơn
+                    </button>
+
+                    <span id="messagePageCounter" class="message-page-counter">1 / 1</span>
+
+                    <button
+                        id="messageNextButton"
+                        class="message-page-button"
+                        type="button"
+                        onclick="changeLoveMessagePage(1)"
+                    >
+                        Mới hơn →
+                    </button>
+                </nav>
+            </article>
         </div>
-      </section>
 
-      <!-- Message của anh -->
-      <div
-        id="loveMessageModal"
-        class="love-message-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="loveMessageTitle"
-        aria-hidden="true"
-        onclick="closeLoveMessageOnBackdrop(event)"
-      >
-        <article class="love-message-card">
-          <button
-            class="love-message-close"
-            type="button"
-            aria-label="Đóng lời nhắn"
-            onclick="closeLoveMessage()"
-          >
-            ×
-          </button>
-
-          <!-- <h2 id="loveMessageTitle">Gửi htrangg của anh,</h2> -->
-
-          <div class="love-message-content">
-            <p>Gửi htrangg của anh,</p>
-
-            <p>
-              Hôm nay là anni 1 tháng của hai đứa, nhưng vì cả hai đều bận nên
-              anh chỉ có thể làm cái này cho em, anh mong em ngày càng khỏe mạnh
-              hơn, xinh đẹp hơn và yêu bản thân em nhaaa. Anh và em sẽ bên nhau
-              thật lâu, để anh chăm sóc cho em mãi về sau.
-            </p>
-
-            <p class="love-signature">Thương em thật nhiều, embe của anh ❤️</p>
-          </div>
-        </article>
-      </div>
     </main>
 
     <script>
-      let declineClickCount = 0;
-      let isTransitioning = false;
+        let declineClickCount = 0;
+        let isTransitioning = false;
 
-      /*
-       * Đổi ngày bắt đầu ở đây.
-       * Định dạng: YYYY-MM-DD
-       */
-      const relationshipStartDate = "2026-06-18";
+        /*
+         * Định dạng: YYYY-MM-DD
+         */
+        const relationshipStartDate = "2026-06-18";
 
-      function calculateDaysTogether() {
-        const output = document.getElementById("daysTogether");
+        function calculateDaysTogether() {
+            const output = document.getElementById("daysTogether");
 
-        if (!output) {
-          return;
+            if (!output) {
+                return;
+            }
+
+            const dateParts = relationshipStartDate
+                .split("-")
+                .map(Number);
+
+            if (
+                dateParts.length !== 3 ||
+                dateParts.some(Number.isNaN)
+            ) {
+                output.textContent = "...";
+                return;
+            }
+
+            const [year, month, day] = dateParts;
+            const startDate = new Date(year, month - 1, day);
+            const today = new Date();
+
+            startDate.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+
+            const millisecondsPerDay = 1000 * 60 * 60 * 24;
+            const days =
+                Math.floor((today - startDate) / millisecondsPerDay) + 1;
+
+            output.textContent =
+                Math.max(0, days).toLocaleString("vi-VN");
         }
 
-        const dateParts = relationshipStartDate.split("-").map(Number);
-
-        if (dateParts.length !== 3 || dateParts.some(Number.isNaN)) {
-          output.textContent = "...";
-          return;
+        function getScreen(screenId) {
+            return document.getElementById(screenId);
         }
 
-        const [year, month, day] = dateParts;
-        const startDate = new Date(year, month - 1, day);
-        const today = new Date();
+        function activateScreen(currentScreenId, nextScreenId) {
+            const currentScreen = getScreen(currentScreenId);
+            const nextScreen = getScreen(nextScreenId);
 
-        startDate.setHours(0, 0, 0, 0);
-        today.setHours(0, 0, 0, 0);
+            if (!currentScreen || !nextScreen) {
+                console.error("Không tìm thấy màn hình cần chuyển.");
+                return false;
+            }
 
-        const millisecondsPerDay = 1000 * 60 * 60 * 24;
-        const days = Math.floor((today - startDate) / millisecondsPerDay) + 1;
+            currentScreen.classList.remove("active", "leaving");
+            nextScreen.classList.add("active");
 
-        output.textContent = Math.max(0, days).toLocaleString("vi-VN");
-      }
-
-      function getScreen(screenId) {
-        return document.getElementById(screenId);
-      }
-
-      function activateScreen(currentScreenId, nextScreenId) {
-        const currentScreen = getScreen(currentScreenId);
-        const nextScreen = getScreen(nextScreenId);
-
-        if (!currentScreen || !nextScreen) {
-          console.error("Không tìm thấy màn hình cần chuyển.");
-          return false;
+            return true;
         }
 
-        currentScreen.classList.remove("active", "leaving");
-        nextScreen.classList.add("active");
+        /*
+         * Chuyển màn hình đầu tiên:
+         * nội dung cũ mờ xuống, nội dung mới xổ từ trên xuống.
+         */
+        function showTogetherScreen() {
+            if (isTransitioning) {
+                return;
+            }
 
-        return true;
-      }
+            isTransitioning = true;
+            calculateDaysTogether();
 
-      /*
-       * Chuyển màn hình đầu tiên:
-       * nội dung cũ mờ xuống, nội dung mới xổ từ trên xuống.
-       */
-      function showTogetherScreen() {
-        if (isTransitioning) {
-          return;
+            const introScreen = getScreen("introScreen");
+            const togetherScreen = getScreen("togetherScreen");
+
+            introScreen.classList.add("leaving");
+
+            setTimeout(() => {
+                togetherScreen.classList.add("active");
+            }, 180);
+
+            setTimeout(() => {
+                introScreen.classList.remove("active", "leaving");
+                isTransitioning = false;
+            }, 950);
         }
 
-        isTransitioning = true;
-        calculateDaysTogether();
+        /*
+         * Chuyển sang màn hình "Em":
+         * một trái tim lớn bay ngang qua và che màn hình tại thời điểm đổi nội dung.
+         */
+        function showHerScreen() {
+            if (isTransitioning) {
+                return;
+            }
 
-        const introScreen = getScreen("introScreen");
-        const togetherScreen = getScreen("togetherScreen");
+            isTransitioning = true;
 
-        introScreen.classList.add("leaving");
+            const overlay =
+                document.getElementById("heartFlyTransition");
 
-        setTimeout(() => {
-          togetherScreen.classList.add("active");
-        }, 180);
+            overlay.classList.remove("play");
+            void overlay.offsetWidth;
+            overlay.classList.add("play");
 
-        setTimeout(() => {
-          introScreen.classList.remove("active", "leaving");
-          isTransitioning = false;
-        }, 950);
-      }
+            setTimeout(() => {
+                activateScreen("togetherScreen", "herScreen");
+            }, 590);
 
-      /*
-       * Chuyển sang màn hình "Em":
-       * một trái tim lớn bay ngang qua và che màn hình tại thời điểm đổi nội dung.
-       */
-      function showHerScreen() {
-        if (isTransitioning) {
-          return;
+            setTimeout(() => {
+                overlay.classList.remove("play");
+                isTransitioning = false;
+            }, 1450);
         }
 
-        isTransitioning = true;
+        /*
+         * Chuyển sang màn hình cuối:
+         * ánh sáng nở từ giữa trái tim và các trái tim nhỏ bung ra.
+         */
+        function showUsScreen() {
+            if (isTransitioning) {
+                return;
+            }
 
-        const overlay = document.getElementById("heartFlyTransition");
+            isTransitioning = true;
 
-        overlay.classList.remove("play");
-        void overlay.offsetWidth;
-        overlay.classList.add("play");
+            const overlay =
+                document.getElementById("bloomTransition");
 
-        setTimeout(() => {
-          activateScreen("togetherScreen", "herScreen");
-        }, 590);
+            overlay.classList.remove("play");
+            void overlay.offsetWidth;
+            overlay.classList.add("play");
 
-        setTimeout(() => {
-          overlay.classList.remove("play");
-          isTransitioning = false;
-        }, 1450);
-      }
+            setTimeout(() => {
+                activateScreen("herScreen", "usScreen");
+            }, 480);
 
-      /*
-       * Chuyển sang màn hình cuối:
-       * ánh sáng nở từ giữa trái tim và các trái tim nhỏ bung ra.
-       */
-      function showUsScreen() {
-        if (isTransitioning) {
-          return;
+            setTimeout(() => {
+                overlay.classList.remove("play");
+                isTransitioning = false;
+            }, 1250);
         }
 
-        isTransitioning = true;
+        function handleDecline() {
+            const declineButton =
+                document.getElementById("decline");
+            const acceptButton =
+                document.getElementById("accept");
+            const buttonGroup =
+                document.getElementById("buttonGroup");
 
-        const overlay = document.getElementById("bloomTransition");
+            if (!declineButton || !acceptButton || !buttonGroup) {
+                console.error("Không tìm thấy nhóm nút bấm.");
+                return;
+            }
 
-        overlay.classList.remove("play");
-        void overlay.offsetWidth;
-        overlay.classList.add("play");
+            declineClickCount++;
 
-        setTimeout(() => {
-          activateScreen("herScreen", "usScreen");
-        }, 480);
+            if (declineClickCount === 1) {
+                declineButton.classList.add("decline-step-1");
+                declineButton.innerText = "Suy nghĩ lại i màaa";
 
-        setTimeout(() => {
-          overlay.classList.remove("play");
-          isTransitioning = false;
-        }, 1250);
-      }
+                acceptButton.classList.add("accept-step-1");
+                acceptButton.innerText = "Ai cho từ chối hã";
+            }
 
-      function handleDecline() {
-        const declineButton = document.getElementById("decline");
-        const acceptButton = document.getElementById("accept");
-        const buttonGroup = document.getElementById("buttonGroup");
+            else if (declineClickCount === 2) {
+                declineButton.classList.remove("decline-step-1");
+                acceptButton.classList.remove("accept-step-1");
 
-        if (!declineButton || !acceptButton || !buttonGroup) {
-          console.error("Không tìm thấy nhóm nút bấm.");
-          return;
+                declineButton.innerText = "Áaaaaaaa";
+                declineButton.classList.add("decline-step-2");
+
+                acceptButton.classList.add("accept-step-2");
+                acceptButton.innerText = "Bé Trangg!! 😾😾😾";
+            }
+
+            else {
+                declineButton.classList.remove("decline-step-2");
+                acceptButton.classList.remove("accept-step-2");
+
+                acceptButton.innerText =
+                    "Hết từ chối được rùi nheeee";
+
+                declineButton.classList.add("decline-disappear");
+
+                setTimeout(() => {
+                    declineButton.style.display = "none";
+                    buttonGroup.classList.add("only-accept");
+                }, 350);
+            }
         }
 
-        declineClickCount++;
+        let currentLoveMessagePage = 0;
 
-        if (declineClickCount === 1) {
-          declineButton.classList.add("decline-step-1");
-          declineButton.innerText = "Suy nghĩ lại i màaa";
-
-          acceptButton.classList.add("accept-step-1");
-          acceptButton.innerText = "Ai cho từ chối hã";
-        } else if (declineClickCount === 2) {
-          declineButton.classList.remove("decline-step-1");
-          acceptButton.classList.remove("accept-step-1");
-
-          declineButton.innerText = "Áaaaaaaa";
-          declineButton.classList.add("decline-step-2");
-
-          acceptButton.classList.add("accept-step-2");
-          acceptButton.innerText = "Bé Trangg!! 😾😾😾";
-        } else {
-          declineButton.classList.remove("decline-step-2");
-          acceptButton.classList.remove("accept-step-2");
-
-          acceptButton.innerText = "Hết từ chối được rùi nheeee";
-
-          declineButton.classList.add("decline-disappear");
-
-          setTimeout(() => {
-            declineButton.style.display = "none";
-            buttonGroup.classList.add("only-accept");
-          }, 350);
-        }
-      }
-
-      function openLoveMessage() {
-        const modal = document.getElementById("loveMessageModal");
-
-        if (!modal) {
-          return;
+        function getLoveMessagePages() {
+            return Array.from(
+                document.querySelectorAll(".love-message-page")
+            );
         }
 
-        modal.classList.add("show");
-        modal.setAttribute("aria-hidden", "false");
-      }
+        function showLoveMessagePage(pageIndex) {
+            const pages = getLoveMessagePages();
 
-      function closeLoveMessage() {
-        const modal = document.getElementById("loveMessageModal");
+            if (pages.length === 0) {
+                return;
+            }
 
-        if (!modal) {
-          return;
+            currentLoveMessagePage = Math.max(
+                0,
+                Math.min(pageIndex, pages.length - 1)
+            );
+
+            pages.forEach((page, index) => {
+                page.classList.toggle(
+                    "active",
+                    index === currentLoveMessagePage
+                );
+            });
+
+            const currentPage = pages[currentLoveMessagePage];
+            const dateLabel = document.getElementById("messagePageDate");
+            const counter = document.getElementById("messagePageCounter");
+            const prevButton = document.getElementById("messagePrevButton");
+            const nextButton = document.getElementById("messageNextButton");
+
+            if (dateLabel) {
+                dateLabel.textContent = currentPage.dataset.date || "";
+            }
+
+            if (counter) {
+                counter.textContent = `${currentLoveMessagePage + 1} / ${pages.length}`;
+            }
+
+            if (prevButton) {
+                prevButton.disabled = currentLoveMessagePage === 0;
+            }
+
+            if (nextButton) {
+                nextButton.disabled = currentLoveMessagePage === pages.length - 1;
+            }
         }
 
-        modal.classList.remove("show");
-        modal.setAttribute("aria-hidden", "true");
-      }
-
-      function closeLoveMessageOnBackdrop(event) {
-        if (event.target.id === "loveMessageModal") {
-          closeLoveMessage();
+        function changeLoveMessagePage(direction) {
+            showLoveMessagePage(currentLoveMessagePage + direction);
         }
-      }
+
+        function openLoveMessage() {
+            const modal = document.getElementById("loveMessageModal");
+            const pages = getLoveMessagePages();
+
+            if (!modal) {
+                return;
+            }
+
+            // Mỗi lần mở, hiện lời nhắn mới nhất.
+            showLoveMessagePage(Math.max(0, pages.length - 1));
+
+            modal.classList.add("show");
+            modal.setAttribute("aria-hidden", "false");
+        }
+
+        function closeLoveMessage() {
+            const modal = document.getElementById("loveMessageModal");
+
+            if (!modal) {
+                return;
+            }
+
+            modal.classList.remove("show");
+            modal.setAttribute("aria-hidden", "true");
+        }
+
+        function closeLoveMessageOnBackdrop(event) {
+            if (event.target.id === "loveMessageModal") {
+                closeLoveMessage();
+            }
+        }
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeLoveMessage();
+            }
+        });
+
+        function createWelcomeHeartRain() {
+            const params = new URLSearchParams(window.location.search);
+            const shouldShow = params.get("welcome") === "1";
+
+            if (!shouldShow) {
+                return;
+            }
+
+            const rainLayer = document.createElement("div");
+            rainLayer.className = "welcome-rain-layer";
+            document.body.appendChild(rainLayer);
+
+            for (let index = 0; index < 90; index++) {
+                const heart = document.createElement("span");
+                heart.className = "welcome-rain-heart";
+                heart.textContent = "♥";
+
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.fontSize = `${14 + Math.random() * 34}px`;
+                heart.style.animationDelay = `${Math.random() * 0.85}s`;
+                heart.style.animationDuration = `${1.35 + Math.random() * 1.05}s`;
+                heart.style.setProperty(
+                    "--rain-drift",
+                    `${-70 + Math.random() * 140}px`
+                );
+
+                rainLayer.appendChild(heart);
+            }
+
+            setTimeout(() => {
+                rainLayer.classList.add("fade-out");
+            }, 1900);
+
+            setTimeout(() => {
+                rainLayer.remove();
+            }, 2600);
+        }
+
+        createWelcomeHeartRain();
+
     </script>
-  </body>
+
+</body>
 </html>

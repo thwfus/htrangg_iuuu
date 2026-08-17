@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love — Login ❤️</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body class="login-page">
+
+    <div class="login-background-hearts" aria-hidden="true">
+        <span class="login-float-heart" style="left:6%;font-size:26px;animation-duration:9s;animation-delay:0s">♥</span>
+        <span class="login-float-heart" style="left:17%;font-size:42px;animation-duration:12s;animation-delay:1.5s">♥</span>
+        <span class="login-float-heart" style="left:29%;font-size:20px;animation-duration:8s;animation-delay:3s">♥</span>
+        <span class="login-float-heart" style="left:41%;font-size:34px;animation-duration:11s;animation-delay:.7s">♥</span>
+        <span class="login-float-heart" style="left:54%;font-size:50px;animation-duration:13s;animation-delay:2.4s">♥</span>
+        <span class="login-float-heart" style="left:67%;font-size:24px;animation-duration:9s;animation-delay:1s">♥</span>
+        <span class="login-float-heart" style="left:79%;font-size:38px;animation-duration:12s;animation-delay:3.5s">♥</span>
+        <span class="login-float-heart" style="left:91%;font-size:29px;animation-duration:10s;animation-delay:.3s">♥</span>
+    </div>
+
+    <main class="login-card" id="loginCard">
+        <div class="login-heart-icon" aria-hidden="true">♥</div>
+        <h1 class="login-title">Hi bé iu ❤️</h1>
+        <p class="login-subtitle">Nhập mật mã của hai đứa để vào nhaaa</p>
+
+        <form class="login-form" id="loginForm" autocomplete="off">
+            <div class="login-field">
+                <label for="username">Tên đăng nhập</label>
+                <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    autocomplete="username"
+                    placeholder="Anh hay gọi em là...?"
+                    required
+                >
+            </div>
+
+            <div class="login-field">
+                <label for="password">Mật khẩu</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="Pass buổi trưa là...?"
+                    required
+                >
+            </div>
+
+            <p id="loginError" class="login-error" aria-live="polite"></p>
+
+            <button class="login-button" type="submit">
+                Vào với anh ❤️
+            </button>
+        </form>
+    </main>
+
+    <div id="loginRainLayer" class="login-rain-layer" aria-hidden="true"></div>
+    <div id="loginSuccessText" class="login-success-text">Đúng là embeiu ruiii ❤️</div>
+
+    <script>
+        const LOGIN_USERNAME = "embeiu";
+        const LOGIN_PASSWORD = "angnhangnhang";
+
+        const loginForm = document.getElementById("loginForm");
+        const loginCard = document.getElementById("loginCard");
+        const loginError = document.getElementById("loginError");
+        const rainLayer = document.getElementById("loginRainLayer");
+        const successText = document.getElementById("loginSuccessText");
+
+        function createLoginHeartRain() {
+            rainLayer.innerHTML = "";
+
+            for (let index = 0; index < 125; index++) {
+                const heart = document.createElement("span");
+                heart.className = "login-rain-heart";
+                heart.textContent = "♥";
+
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.fontSize = `${14 + Math.random() * 42}px`;
+                heart.style.animationDelay = `${Math.random() * 0.95}s`;
+                heart.style.animationDuration = `${1.4 + Math.random() * 1.1}s`;
+                heart.style.setProperty(
+                    "--login-drift",
+                    `${-90 + Math.random() * 180}px`
+                );
+
+                rainLayer.appendChild(heart);
+            }
+        }
+
+        loginForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value;
+
+            if (username !== LOGIN_USERNAME || password !== LOGIN_PASSWORD) {
+                loginError.textContent = "Hong đúng gùi, thử lại nha bé 🥺";
+                loginCard.animate(
+                    [
+                        { transform: "translateX(0)" },
+                        { transform: "translateX(-9px)" },
+                        { transform: "translateX(9px)" },
+                        { transform: "translateX(-6px)" },
+                        { transform: "translateX(0)" }
+                    ],
+                    { duration: 360, easing: "ease" }
+                );
+                return;
+            }
+
+            loginError.textContent = "";
+
+            try {
+                sessionStorage.setItem("loveAuthenticated", "true");
+                sessionStorage.setItem("showWelcomeRain", "true");
+            } catch (error) {
+                console.warn("Không thể lưu trạng thái đăng nhập.", error);
+            }
+
+            loginCard.classList.add("success");
+            successText.classList.add("show");
+            createLoginHeartRain();
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 2250);
+        });
+    </script>
+</body>
+</html>
