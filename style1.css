@@ -341,7 +341,8 @@ body {
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
 }
 
 .photo-slot img + span {
@@ -1838,5 +1839,2234 @@ body {
 
     .login-card {
         padding: 38px 22px 30px;
+    }
+}
+
+
+
+/* =========================================================
+   HỆ THỐNG THƯ MỤC / ALBUM — V2
+   ========================================================= */
+
+/*
+ * Đây là một trái tim duy nhất, đặt đúng tâm viewport.
+ * Nó tiếp tục đập khi đi:
+ * Em -> thư mục -> album -> quay lại -> Tôi và em.
+ */
+.memory-heart-backdrop {
+    position: fixed;
+    z-index: 6;
+
+    top: 50%;
+    left: 50%;
+
+    width: 470px;
+    height: 470px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.82);
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0.5s;
+}
+
+.memory-heart-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+}
+
+.memory-persistent-heart {
+    --heart-size: 270px;
+    --heart-half: 135px;
+
+    opacity: 0.96;
+
+    filter:
+        drop-shadow(
+            0 22px 34px
+            rgba(255, 23, 68, 0.34)
+        );
+}
+
+/* =========================================================
+   FOLDER SCREEN
+   ========================================================= */
+
+.folder-screen-content {
+    position: relative;
+    z-index: 12;
+
+    width: min(1050px, 96vw);
+    min-height: min(800px, 95vh);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.folder-screen-content .gallery-title {
+    margin-bottom: 0;
+}
+
+.folder-screen-subtitle {
+    position: relative;
+    z-index: 12;
+
+    margin: 13px 0 30px;
+
+    color: #a61e4d;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(16px, 2.1vw, 21px);
+    font-style: italic;
+
+    text-shadow:
+        0 3px 10px
+        rgba(255, 255, 255, 0.78);
+}
+
+.album-folder-grid {
+    position: relative;
+    z-index: 12;
+
+    width: min(930px, 94vw);
+
+    display: grid;
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(185px, 1fr)
+        );
+
+    gap: clamp(20px, 3vw, 34px);
+
+    padding: 12px 8px 18px;
+}
+
+.album-folder-card {
+    position: relative;
+    isolation: isolate;
+
+    min-height: 205px;
+    padding: 18px 14px 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #941543;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 249, 252, 0.33),
+            rgba(255, 228, 238, 0.22)
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.63);
+
+    border-radius: 28px;
+    cursor: pointer;
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    box-shadow:
+        0 16px 34px
+        rgba(131, 24, 67, 0.12);
+
+    opacity: 0;
+
+    transform:
+        translateY(32px)
+        scale(0.92);
+
+    animation:
+        folderCardIn
+        0.68s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        forwards;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+/*
+ * Thay "đốm sáng" bằng một quầng sáng đều, nằm sau folder.
+ * Không có mảng sáng cứng phía trên nữa.
+ */
+.album-folder-card::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    top: 38%;
+    left: 50%;
+
+    width: 150px;
+    height: 110px;
+
+    opacity: 0;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255, 255, 255, 0.50) 0%,
+            rgba(255, 111, 151, 0.18) 50%,
+            transparent 74%
+        );
+
+    filter: blur(13px);
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.72);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.album-folder-card:nth-child(2) {
+    animation-delay: 0.07s;
+}
+
+.album-folder-card:nth-child(3) {
+    animation-delay: 0.14s;
+}
+
+.album-folder-card:nth-child(4) {
+    animation-delay: 0.21s;
+}
+
+.album-folder-card:nth-child(5) {
+    animation-delay: 0.28s;
+}
+
+.album-folder-card:nth-child(6) {
+    animation-delay: 0.35s;
+}
+
+.album-folder-card:hover {
+    transform:
+        translateY(-7px)
+        scale(1.025);
+
+    border-color:
+        rgba(255, 255, 255, 0.82);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 252, 253, 0.43),
+            rgba(255, 226, 237, 0.28)
+        );
+
+    box-shadow:
+        0 24px 48px
+        rgba(131, 24, 67, 0.18);
+}
+
+.album-folder-card:hover::before {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.12);
+}
+
+@keyframes folderCardIn {
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* Folder icon */
+.album-folder-visual {
+    position: relative;
+
+    width: 154px;
+    height: 100px;
+
+    margin: 13px auto 18px;
+
+    overflow: visible;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff6f96,
+            #ff477e
+        );
+
+    border:
+        2px solid
+        rgba(255, 255, 255, 0.55);
+
+    border-radius:
+        14px 20px 20px 20px;
+
+    box-shadow:
+        0 13px 25px
+        rgba(255, 65, 108, 0.23);
+
+    transition:
+        transform 0.34s
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+ * Tab của folder.
+ * Không dùng z-index âm nên không còn hình chữ nhật sáng bị cắt.
+ */
+.album-folder-visual::before {
+    content: "";
+
+    position: absolute;
+    z-index: 0;
+
+    top: -17px;
+    left: 9px;
+
+    width: 64px;
+    height: 27px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff84a5,
+            #ff678f
+        );
+
+    border:
+        2px solid
+        rgba(255, 255, 255, 0.42);
+
+    border-bottom: 0;
+
+    border-radius:
+        12px 12px 5px 5px;
+}
+
+/* Lớp mặt trước giúp folder nhìn liền khối hơn */
+.album-folder-visual::after {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    border-radius:
+        14px 20px 20px 20px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.12),
+            transparent 30%,
+            rgba(147, 16, 61, 0.06)
+        );
+}
+
+.album-folder-card:hover
+.album-folder-visual {
+    transform:
+        rotate(1.5deg)
+        translateY(-3px)
+        scale(1.055);
+}
+
+.album-folder-cover {
+    position: absolute;
+    z-index: 1;
+
+    inset: 7px 8px 8px;
+
+    width:
+        calc(100% - 16px);
+
+    height:
+        calc(100% - 15px);
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    opacity: 0.67;
+
+    filter:
+        saturate(0.88)
+        brightness(1.02);
+}
+
+.album-folder-heart {
+    position: absolute;
+    z-index: 4;
+
+    top: 52%;
+    left: 50%;
+
+    color:
+        rgba(255, 255, 255, 0.94);
+
+    font-size: 36px;
+
+    text-shadow:
+        0 6px 15px
+        rgba(162, 18, 67, 0.25);
+
+    transform:
+        translate(-50%, -50%);
+
+    animation:
+        folderHeartPulse
+        1.18s ease-in-out
+        infinite;
+}
+
+@keyframes folderHeartPulse {
+    0%,
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    48% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.14);
+    }
+}
+
+.album-folder-name {
+    max-width: 100%;
+
+    color: #9d174d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 700;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.album-folder-count {
+    margin-top: 6px;
+
+    color:
+        rgba(131, 24, 67, 0.72);
+
+    font-size: 13px;
+}
+
+.folder-next-button,
+.folder-message-button {
+    position: relative;
+    z-index: 14;
+
+    margin-top: 14px;
+}
+
+/* =========================================================
+   ALBUM VIEW
+   ========================================================= */
+
+.album-view {
+    position: relative;
+    z-index: 14;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+/*
+ * Topbar không còn chiếm chiều cao của stage.
+ * Vì vậy ảnh và trái tim dùng cùng một tâm viewport.
+ */
+.album-view-topbar {
+    position: absolute;
+    z-index: 30;
+
+    top: 20px;
+    left: 50%;
+
+    width: min(1100px, 96vw);
+
+    display: grid;
+    grid-template-columns:
+        150px 1fr 150px;
+    align-items: center;
+
+    transform: translateX(-50%);
+}
+
+.album-view-title {
+    grid-column: 2;
+
+    max-width: 680px;
+    justify-self: center;
+
+    color: #8f123f;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(27px, 4vw, 46px);
+
+    line-height: 1.05;
+    font-style: italic;
+    text-align: center;
+
+    text-shadow:
+        0 3px 11px
+        rgba(255, 255, 255, 0.84),
+        0 8px 20px
+        rgba(143, 18, 63, 0.16);
+
+    animation:
+        albumTitleIn
+        0.62s
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes albumTitleIn {
+    from {
+        opacity: 0;
+        transform:
+            translateY(-18px)
+            scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+.album-back-button {
+    justify-self: start;
+
+    min-width: 118px;
+    padding: 9px 16px;
+
+    color: #a61e4d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 700;
+
+    background:
+        rgba(255, 255, 255, 0.34);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.69);
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(157, 23, 77, 0.11);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.album-back-button:hover {
+    transform: translateX(-4px);
+
+    background:
+        rgba(255, 255, 255, 0.55);
+}
+
+/*
+ * Điểm quan trọng:
+ * stage phủ TOÀN viewport.
+ * Tâm stage = tâm persistent heart.
+ */
+.album-photo-stage {
+    position: absolute;
+    z-index: 16;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.album-photo-stage.page-change {
+    animation:
+        albumPageFlash
+        0.38s ease;
+}
+
+@keyframes albumPageFlash {
+    0% {
+        opacity: 0.45;
+        transform: scale(0.99);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/*
+ * Khung không còn cố định tỷ lệ 4/5.
+ * Kích thước thật do chính <img> quyết định.
+ */
+.album-photo {
+    position: absolute;
+    z-index: 19;
+
+    width: auto;
+    height: auto;
+    aspect-ratio: auto;
+
+    padding: 7px;
+
+    opacity: 0;
+
+    transform:
+        translate(
+            calc(-50% + var(--orbit-x, 0px)),
+            calc(-50% + var(--orbit-y, 0px))
+        )
+        scale(0.35)
+        rotate(
+            var(
+                --album-photo-rotation,
+                0deg
+            )
+        );
+
+    animation:
+        albumPhotoAppearV2
+        0.72s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        var(--album-photo-delay, 0s)
+        forwards;
+}
+
+/*
+ * Override CSS ảnh global:
+ * ảnh tự quyết định kích thước khung và giữ toàn bộ nội dung.
+ */
+.album-photo img {
+    position: relative;
+    inset: auto;
+
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 155px;
+    max-height: 190px;
+
+    object-fit: contain;
+    object-position: center;
+
+    border-radius: 15px;
+
+    background: transparent;
+}
+
+.album-photo-landscape img {
+    max-width: 190px;
+    max-height: 140px;
+}
+
+.album-photo-portrait img {
+    max-width: 140px;
+    max-height: 195px;
+}
+
+.album-photo-square img {
+    max-width: 155px;
+    max-height: 155px;
+}
+
+.album-photo:hover {
+    z-index: 28;
+}
+
+.album-photo:hover img {
+    transform: scale(1.03);
+}
+
+/*
+ * 8 vị trí này là offset TỪ TÂM VIEWPORT,
+ * chính xác là tâm của persistent heart.
+ *
+ * Bố cục lần theo viền trái tim:
+ * 1,2 = hai thùy trên
+ * 3,4 = hai cạnh ngoài
+ * 5,6 = hai cạnh dưới
+ * 7,8 = gần chóp tim
+ */
+.album-pos-1 {
+    top: 50%;
+    left: 50%;
+    --orbit-x: -165px;
+    --orbit-y: -205px;
+    --album-photo-rotation: -8deg;
+}
+
+.album-pos-2 {
+    top: 50%;
+    left: 50%;
+    --orbit-x: 165px;
+    --orbit-y: -205px;
+    --album-photo-rotation: 8deg;
+}
+
+.album-pos-3 {
+    top: 50%;
+    left: 50%;
+    --orbit-x: -315px;
+    --orbit-y: -68px;
+    --album-photo-rotation: -7deg;
+}
+
+.album-pos-4 {
+    top: 50%;
+    left: 50%;
+    --orbit-x: 315px;
+    --orbit-y: -68px;
+    --album-photo-rotation: 7deg;
+}
+
+.album-pos-5 {
+    top: 50%;
+    left: 50%;
+    --orbit-x: -265px;
+    --orbit-y: 145px;
+    --album-photo-rotation: 7deg;
+}
+
+.album-pos-6 {
+    top: 50%;
+    left: 50%;
+    --orbit-x: 265px;
+    --orbit-y: 145px;
+    --album-photo-rotation: -7deg;
+}
+
+.album-pos-7 {
+    top: 50%;
+    left: 50%;
+    --orbit-x: -105px;
+    --orbit-y: 260px;
+    --album-photo-rotation: -5deg;
+}
+
+.album-pos-8 {
+    top: 50%;
+    left: 50%;
+    --orbit-x: 105px;
+    --orbit-y: 260px;
+    --album-photo-rotation: 5deg;
+}
+
+@keyframes albumPhotoAppearV2 {
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(
+                calc(-50% + var(--orbit-x, 0px)),
+                calc(-50% + var(--orbit-y, 0px))
+            )
+            scale(0.24)
+            rotate(
+                calc(
+                    var(
+                        --album-photo-rotation,
+                        0deg
+                    ) - 14deg
+                )
+            );
+    }
+
+    72% {
+        opacity: 1;
+
+        transform:
+            translate(
+                calc(-50% + var(--orbit-x, 0px)),
+                calc(-50% + var(--orbit-y, 0px))
+            )
+            scale(1.06)
+            rotate(
+                var(
+                    --album-photo-rotation,
+                    0deg
+                )
+            );
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate(
+                calc(-50% + var(--orbit-x, 0px)),
+                calc(-50% + var(--orbit-y, 0px))
+            )
+            scale(1)
+            rotate(
+                var(
+                    --album-photo-rotation,
+                    0deg
+                )
+            );
+    }
+}
+
+.album-empty-state {
+    position: absolute;
+    z-index: 28;
+
+    top: 54%;
+    left: 50%;
+
+    width: max-content;
+    max-width: 86vw;
+
+    padding: 14px 22px;
+
+    color: #a61e4d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 17px;
+    font-style: italic;
+
+    text-align: center;
+
+    background:
+        rgba(255, 255, 255, 0.32);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.65);
+
+    border-radius: 999px;
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    transform:
+        translate(-50%, -50%);
+}
+
+.album-pagination {
+    position: absolute;
+    z-index: 32;
+
+    bottom: 15px;
+    left: 50%;
+
+    width: min(480px, 90vw);
+
+    display: grid;
+    grid-template-columns:
+        1fr auto 1fr;
+    align-items: center;
+
+    gap: 14px;
+
+    transform: translateX(-50%);
+}
+
+.album-page-button {
+    min-height: 40px;
+    padding: 8px 14px;
+
+    color: #a61e4d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 700;
+
+    background:
+        rgba(255, 255, 255, 0.34);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.65);
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease,
+        background 0.25s ease;
+}
+
+.album-page-button:first-child {
+    justify-self: start;
+}
+
+.album-page-button:last-child {
+    justify-self: end;
+}
+
+.album-page-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    background:
+        rgba(255, 255, 255, 0.55);
+}
+
+.album-page-button:disabled {
+    opacity: 0.28;
+    cursor: default;
+}
+
+.album-page-counter {
+    color: #b4235a;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.album-screen.album-closing {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+/* =========================================================
+   HIỆU ỨNG MỞ FOLDER — HEART BLOOM BURST V2
+   ========================================================= */
+
+.album-burst-overlay {
+    z-index: 125;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+}
+
+/* nền lóe rất nhẹ, không phủ kín màn hình */
+.album-burst-overlay::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    opacity: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255, 255, 255, 0.46) 0%,
+            rgba(255, 166, 192, 0.15) 24%,
+            transparent 58%
+        );
+}
+
+.album-burst-overlay.play::before {
+    animation:
+        albumBurstBackdropV2
+        1.35s ease forwards;
+}
+
+.album-burst-heart-shell {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 190px;
+    height: 190px;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.24);
+}
+
+.album-burst-overlay.play
+.album-burst-heart-shell {
+    animation:
+        albumHeartBloomV2
+        1.22s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        forwards;
+}
+
+.album-burst-heart {
+    position: relative;
+
+    width: 190px;
+    height: 190px;
+
+    background: #ff1744;
+
+    transform: rotate(-45deg);
+
+    filter:
+        drop-shadow(
+            0 18px 32px
+            rgba(255, 23, 68, 0.36)
+        )
+        drop-shadow(
+            0 0 18px
+            rgba(255, 255, 255, 0.24)
+        );
+}
+
+.album-burst-heart::before,
+.album-burst-heart::after {
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    background: #ff1744;
+    border-radius: 50%;
+}
+
+.album-burst-heart::before {
+    top: -95px;
+    left: 0;
+}
+
+.album-burst-heart::after {
+    top: 0;
+    left: 95px;
+}
+
+/*
+ * Vòng sáng nổ ra từ tim.
+ */
+.album-burst-ring {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 110px;
+    height: 110px;
+
+    border:
+        4px solid
+        rgba(255, 255, 255, 0.72);
+
+    border-radius: 50%;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.3);
+
+    box-shadow:
+        0 0 25px
+        rgba(255, 81, 128, 0.34);
+}
+
+.album-burst-overlay.play
+.album-burst-ring-1 {
+    animation:
+        albumBurstRingV2
+        0.74s ease-out
+        0.52s forwards;
+}
+
+.album-burst-overlay.play
+.album-burst-ring-2 {
+    animation:
+        albumBurstRingV2
+        0.86s ease-out
+        0.60s forwards;
+}
+
+.album-burst-flash {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 60px;
+    height: 60px;
+
+    opacity: 0;
+
+    background:
+        radial-gradient(
+            circle,
+            white 0%,
+            rgba(255, 214, 225, 0.92) 30%,
+            rgba(255, 92, 139, 0.38) 62%,
+            transparent 100%
+        );
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.4);
+}
+
+.album-burst-overlay.play
+.album-burst-flash {
+    animation:
+        albumBurstFlashV2
+        0.55s ease-out
+        0.50s forwards;
+}
+
+@keyframes albumHeartBloomV2 {
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.20);
+    }
+
+    22% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.72);
+    }
+
+    40% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.02);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.93);
+    }
+
+    60% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.12);
+    }
+
+    73% {
+        opacity: 0.72;
+
+        filter: blur(0);
+        transform:
+            translate(-50%, -50%)
+            scale(1.30);
+    }
+
+    100% {
+        opacity: 0;
+
+        filter: blur(5px);
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.62);
+    }
+}
+
+@keyframes albumBurstBackdropV2 {
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    43% {
+        opacity: 0.3;
+    }
+
+    62% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 0.28;
+    }
+}
+
+@keyframes albumBurstRingV2 {
+    0% {
+        opacity: 0.95;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.35);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(5.8);
+    }
+}
+
+@keyframes albumBurstFlashV2 {
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.2);
+    }
+
+    34% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(5);
+    }
+}
+
+.album-burst-piece {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    color: var(--piece-color, #ff3a70);
+
+    font-size:
+        clamp(17px, 3vw, 34px);
+
+    opacity: 0;
+
+    text-shadow:
+        0 5px 13px
+        rgba(255, 255, 255, 0.58);
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.12);
+}
+
+.album-burst-overlay.play
+.album-burst-piece {
+    animation:
+        albumPieceExplodeV2
+        0.82s
+        cubic-bezier(0.14, 0.72, 0.28, 1)
+        0.57s
+        forwards;
+}
+
+.burst-piece-1 {
+    --burst-album-x: -34vw;
+    --burst-album-y: -27vh;
+    --burst-album-r: -35deg;
+    --piece-color: #ff2d68;
+}
+
+.burst-piece-2 {
+    --burst-album-x: -15vw;
+    --burst-album-y: -38vh;
+    --burst-album-r: 28deg;
+    --piece-color: #ffffff;
+}
+
+.burst-piece-3 {
+    --burst-album-x: 6vw;
+    --burst-album-y: -40vh;
+    --burst-album-r: -22deg;
+    --piece-color: #ff6f9d;
+}
+
+.burst-piece-4 {
+    --burst-album-x: 29vw;
+    --burst-album-y: -29vh;
+    --burst-album-r: 38deg;
+    --piece-color: #ffffff;
+}
+
+.burst-piece-5 {
+    --burst-album-x: 38vw;
+    --burst-album-y: -4vh;
+    --burst-album-r: -30deg;
+    --piece-color: #ff3b76;
+}
+
+.burst-piece-6 {
+    --burst-album-x: 31vw;
+    --burst-album-y: 24vh;
+    --burst-album-r: 32deg;
+    --piece-color: #ff8db0;
+}
+
+.burst-piece-7 {
+    --burst-album-x: 13vw;
+    --burst-album-y: 36vh;
+    --burst-album-r: -18deg;
+    --piece-color: #ffffff;
+}
+
+.burst-piece-8 {
+    --burst-album-x: -10vw;
+    --burst-album-y: 38vh;
+    --burst-album-r: 27deg;
+    --piece-color: #ff477e;
+}
+
+.burst-piece-9 {
+    --burst-album-x: -30vw;
+    --burst-album-y: 27vh;
+    --burst-album-r: -32deg;
+    --piece-color: #ffffff;
+}
+
+.burst-piece-10 {
+    --burst-album-x: -39vw;
+    --burst-album-y: 5vh;
+    --burst-album-r: 20deg;
+    --piece-color: #ff6d99;
+}
+
+.burst-piece-11 {
+    --burst-album-x: -24vw;
+    --burst-album-y: -6vh;
+    --burst-album-r: -16deg;
+    --piece-color: #ff2d68;
+}
+
+.burst-piece-12 {
+    --burst-album-x: 23vw;
+    --burst-album-y: 7vh;
+    --burst-album-r: 18deg;
+    --piece-color: #ffffff;
+}
+
+@keyframes albumPieceExplodeV2 {
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.1)
+            rotate(0deg);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 0.92;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(
+                calc(
+                    -50% +
+                    var(--burst-album-x)
+                ),
+                calc(
+                    -50% +
+                    var(--burst-album-y)
+                )
+            )
+            scale(1.22)
+            rotate(
+                var(--burst-album-r)
+            );
+    }
+}
+
+/* =========================================================
+   RESPONSIVE ALBUM
+   ========================================================= */
+
+@media (max-width: 760px) {
+    .memory-heart-backdrop {
+        width: 325px;
+        height: 325px;
+    }
+
+    .memory-persistent-heart {
+        --heart-size: 175px;
+        --heart-half: 87.5px;
+    }
+
+    .folder-screen-content {
+        min-height: 94vh;
+        justify-content: flex-start;
+        padding-top: 7vh;
+    }
+
+    .folder-screen-subtitle {
+        margin: 9px 0 18px;
+        padding: 0 18px;
+    }
+
+    .album-folder-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 13px;
+
+        max-height: 59vh;
+        overflow-y: auto;
+
+        padding:
+            10px 7px 17px;
+    }
+
+    .album-folder-card {
+        min-height: 158px;
+        padding: 12px 7px;
+        border-radius: 21px;
+    }
+
+    .album-folder-visual {
+        width: 106px;
+        height: 70px;
+        margin:
+            11px auto 11px;
+    }
+
+    .album-folder-visual::before {
+        top: -13px;
+        left: 7px;
+
+        width: 45px;
+        height: 21px;
+    }
+
+    .album-folder-name {
+        font-size: 14px;
+    }
+
+    .folder-next-button,
+    .folder-message-button {
+        margin-top: 4px;
+    }
+
+    .album-view-topbar {
+        top: 12px;
+
+        width: 96vw;
+
+        grid-template-columns:
+            85px 1fr 85px;
+    }
+
+    .album-view-title {
+        max-width: 60vw;
+
+        font-size:
+            clamp(23px, 7vw, 34px);
+    }
+
+    .album-back-button {
+        min-width: auto;
+        padding: 7px 10px;
+        font-size: 11px;
+    }
+
+    .album-photo img {
+        max-width: 95px;
+        max-height: 126px;
+    }
+
+    .album-photo-landscape img {
+        max-width: 118px;
+        max-height: 88px;
+    }
+
+    .album-photo-portrait img {
+        max-width: 87px;
+        max-height: 132px;
+    }
+
+    .album-photo-square img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    .album-pos-1 {
+        --orbit-x: -82px;
+        --orbit-y: -137px;
+    }
+
+    .album-pos-2 {
+        --orbit-x: 82px;
+        --orbit-y: -137px;
+    }
+
+    .album-pos-3 {
+        --orbit-x: -150px;
+        --orbit-y: -42px;
+    }
+
+    .album-pos-4 {
+        --orbit-x: 150px;
+        --orbit-y: -42px;
+    }
+
+    .album-pos-5 {
+        --orbit-x: -135px;
+        --orbit-y: 93px;
+    }
+
+    .album-pos-6 {
+        --orbit-x: 135px;
+        --orbit-y: 93px;
+    }
+
+    .album-pos-7 {
+        --orbit-x: -58px;
+        --orbit-y: 168px;
+    }
+
+    .album-pos-8 {
+        --orbit-x: 58px;
+        --orbit-y: 168px;
+    }
+
+    .album-pagination {
+        bottom: 10px;
+
+        width: 90vw;
+    }
+
+    .album-page-button {
+        padding: 7px 11px;
+        font-size: 12px;
+    }
+
+    .album-burst-heart-shell,
+    .album-burst-heart,
+    .album-burst-heart::before,
+    .album-burst-heart::after {
+        width: 130px;
+        height: 130px;
+    }
+
+    .album-burst-heart::before {
+        top: -65px;
+    }
+
+    .album-burst-heart::after {
+        left: 65px;
+    }
+}
+
+@media (max-height: 700px) and (min-width: 761px) {
+    .memory-persistent-heart {
+        --heart-size: 235px;
+        --heart-half: 117.5px;
+    }
+
+    .album-photo img {
+        max-width: 135px;
+        max-height: 165px;
+    }
+
+    .album-photo-landscape img {
+        max-width: 165px;
+        max-height: 115px;
+    }
+
+    .album-pos-1 {
+        --orbit-x: -145px;
+        --orbit-y: -165px;
+    }
+
+    .album-pos-2 {
+        --orbit-x: 145px;
+        --orbit-y: -165px;
+    }
+
+    .album-pos-3 {
+        --orbit-x: -270px;
+        --orbit-y: -55px;
+    }
+
+    .album-pos-4 {
+        --orbit-x: 270px;
+        --orbit-y: -55px;
+    }
+
+    .album-pos-5 {
+        --orbit-x: -230px;
+        --orbit-y: 115px;
+    }
+
+    .album-pos-6 {
+        --orbit-x: 230px;
+        --orbit-y: 115px;
+    }
+
+    .album-pos-7 {
+        --orbit-x: -95px;
+        --orbit-y: 205px;
+    }
+
+    .album-pos-8 {
+        --orbit-x: 95px;
+        --orbit-y: 205px;
+    }
+}
+
+
+/* =========================================================
+   ALBUM / FOLDER V3
+   - Không phân trang ảnh
+   - Tất cả ảnh quây quanh cùng một trái tim
+   - Tối đa 5 folder / hàng
+   ========================================================= */
+
+/* ---------- FOLDER GRID: tối đa 5 folder / hàng ---------- */
+
+.album-folder-grid {
+    width: min(1180px, 96vw);
+
+    display: grid;
+
+    /*
+     * Desktop luôn tối đa 5 cột.
+     * Folder thứ 6 tự xuống hàng.
+     */
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    align-items: stretch;
+
+    gap: 20px;
+
+    padding:
+        12px 4px 20px;
+}
+
+.album-folder-card {
+    width: 100%;
+    min-width: 0;
+
+    min-height: 175px;
+
+    padding:
+        16px 10px 13px;
+
+    border-radius: 24px;
+}
+
+/*
+ * Không còn quầng / đốm sáng pseudo ở phía trên khi hover.
+ */
+.album-folder-card::before {
+    display: none !important;
+}
+
+.album-folder-card:hover {
+    transform:
+        translateY(-6px)
+        scale(1.025);
+
+    box-shadow:
+        0 22px 42px
+        rgba(131, 24, 67, 0.17);
+
+    background:
+        rgba(255, 248, 251, 0.39);
+}
+
+.album-folder-card:hover
+.album-folder-cover {
+    filter:
+        saturate(1)
+        brightness(1.07);
+}
+
+.album-folder-visual {
+    width: 132px;
+    height: 86px;
+
+    margin:
+        11px auto 15px;
+}
+
+.album-folder-name {
+    font-size: 16px;
+}
+
+.album-folder-count {
+    font-size: 12px;
+}
+
+/* ---------- TRÁI TIM VÀ ALBUM DÙNG CHUNG 1 TÂM ---------- */
+
+.memory-heart-backdrop {
+    top: 54%;
+    left: 50%;
+
+    width: 460px;
+    height: 460px;
+}
+
+.memory-persistent-heart {
+    --heart-size: 250px;
+    --heart-half: 125px;
+}
+
+.album-view {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.album-photo-stage {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+/*
+ * Tất cả ảnh có cùng điểm gốc:
+ * tâm trái tim = 50% ngang, 54% dọc.
+ *
+ * JS chỉ thay --orbit-x / --orbit-y.
+ */
+.album-photo {
+    position: absolute;
+
+    top: 54%;
+    left: 50%;
+
+    width: auto;
+    height: auto;
+    aspect-ratio: auto;
+
+    padding: 6px;
+
+    opacity: 0;
+
+    transform:
+        translate(
+            calc(
+                -50% +
+                var(--orbit-x, 0px)
+            ),
+            calc(
+                -50% +
+                var(--orbit-y, 0px)
+            )
+        )
+        scale(0.35)
+        rotate(
+            var(
+                --album-photo-rotation,
+                0deg
+            )
+        );
+
+    animation:
+        albumPhotoCircleIn
+        0.68s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        )
+        var(
+            --album-photo-delay,
+            0s
+        )
+        forwards;
+}
+
+.album-photo img {
+    position: relative;
+    inset: auto;
+
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    /*
+     * Giá trị này do JS tự thay đổi theo số ảnh.
+     */
+    max-width:
+        var(
+            --album-photo-size,
+            150px
+        );
+
+    max-height:
+        calc(
+            var(
+                --album-photo-size,
+                150px
+            ) * 1.28
+        );
+
+    object-fit: contain;
+    object-position: center;
+
+    border-radius: 14px;
+}
+
+.album-photo-landscape img {
+    max-width:
+        calc(
+            var(
+                --album-photo-size,
+                150px
+            ) * 1.22
+        );
+
+    max-height:
+        calc(
+            var(
+                --album-photo-size,
+                150px
+            ) * 0.83
+        );
+}
+
+.album-photo-portrait img {
+    max-width:
+        calc(
+            var(
+                --album-photo-size,
+                150px
+            ) * 0.90
+        );
+
+    max-height:
+        calc(
+            var(
+                --album-photo-size,
+                150px
+            ) * 1.34
+        );
+}
+
+.album-photo-square img {
+    max-width:
+        var(
+            --album-photo-size,
+            150px
+        );
+
+    max-height:
+        var(
+            --album-photo-size,
+            150px
+        );
+}
+
+@keyframes albumPhotoCircleIn {
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(
+                calc(
+                    -50% +
+                    var(
+                        --orbit-x,
+                        0px
+                    ) * 0.28
+                ),
+                calc(
+                    -50% +
+                    var(
+                        --orbit-y,
+                        0px
+                    ) * 0.28
+                )
+            )
+            scale(0.18)
+            rotate(0deg);
+    }
+
+    74% {
+        opacity: 1;
+
+        transform:
+            translate(
+                calc(
+                    -50% +
+                    var(
+                        --orbit-x,
+                        0px
+                    )
+                ),
+                calc(
+                    -50% +
+                    var(
+                        --orbit-y,
+                        0px
+                    )
+                )
+            )
+            scale(1.07)
+            rotate(
+                var(
+                    --album-photo-rotation,
+                    0deg
+                )
+            );
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate(
+                calc(
+                    -50% +
+                    var(
+                        --orbit-x,
+                        0px
+                    )
+                ),
+                calc(
+                    -50% +
+                    var(
+                        --orbit-y,
+                        0px
+                    )
+                )
+            )
+            scale(1)
+            rotate(
+                var(
+                    --album-photo-rotation,
+                    0deg
+                )
+            );
+    }
+}
+
+/*
+ * Bỏ toàn bộ vị trí album-pos-* của bản cũ.
+ * JS V3 quản lý vị trí trực tiếp.
+ */
+.album-pos-1,
+.album-pos-2,
+.album-pos-3,
+.album-pos-4,
+.album-pos-5,
+.album-pos-6,
+.album-pos-7,
+.album-pos-8 {
+    top: 54%;
+    left: 50%;
+}
+
+/* ---------- TOP BAR ---------- */
+
+.album-view-topbar {
+    top: 15px;
+
+    width: min(
+        1100px,
+        95vw
+    );
+
+    grid-template-columns:
+        135px 1fr 135px;
+}
+
+.album-view-title {
+    max-width: 700px;
+
+    font-size:
+        clamp(
+            25px,
+            3.8vw,
+            43px
+        );
+
+    line-height: 1.05;
+}
+
+/*
+ * Không còn pagination ở đáy.
+ */
+.album-pagination {
+    display: none !important;
+}
+
+/* ---------- Hiệu ứng mở folder gọn hơn ---------- */
+
+.album-burst-overlay.play
+.album-burst-heart-shell {
+    animation:
+        albumHeartPopClean
+        1.14s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        )
+        forwards;
+}
+
+@keyframes albumHeartPopClean {
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(0.20);
+    }
+
+    28% {
+        opacity: 1;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(0.82);
+    }
+
+    46% {
+        opacity: 1;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(1.04);
+    }
+
+    58% {
+        opacity: 1;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(0.95);
+    }
+
+    70% {
+        opacity: 1;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(1.12);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(1.34);
+    }
+}
+
+.album-burst-overlay.play
+.album-burst-piece {
+    animation-duration: 0.68s;
+    animation-delay: 0.61s;
+}
+
+/* ---------- RESPONSIVE FOLDER GRID ---------- */
+
+@media (max-width: 1100px) {
+    .album-folder-grid {
+        grid-template-columns:
+            repeat(
+                4,
+                minmax(0, 1fr)
+            );
+    }
+}
+
+@media (max-width: 860px) {
+    .album-folder-grid {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+    }
+}
+
+@media (max-width: 650px) {
+    .album-folder-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 12px;
+    }
+
+    .album-folder-card {
+        min-height: 150px;
+    }
+
+    .album-folder-visual {
+        width: 102px;
+        height: 67px;
+    }
+
+    .memory-heart-backdrop {
+        top: 54%;
+
+        width: 315px;
+        height: 315px;
+    }
+
+    .memory-persistent-heart {
+        --heart-size: 165px;
+        --heart-half: 82.5px;
+    }
+
+    .album-photo {
+        top: 54%;
+    }
+
+    .album-view-topbar {
+        top: 9px;
+
+        grid-template-columns:
+            82px 1fr 82px;
+    }
+
+    .album-view-title {
+        max-width: 62vw;
+
+        font-size:
+            clamp(
+                21px,
+                6.7vw,
+                31px
+            );
+    }
+}
+
+@media (max-width: 390px) {
+    .album-folder-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .album-folder-card {
+        width: min(
+            250px,
+            86vw
+        );
+
+        justify-self: center;
     }
 }

@@ -48,6 +48,47 @@
         <span class="floating-heart">♥</span>
     </div>
 
+    <!--
+        TRÁI TIM TRUNG TÂM CỐ ĐỊNH.
+        Khi đã vào khu vực "Em" / "Tôi và em" / album,
+        đây là CÙNG MỘT trái tim và nó tiếp tục đập xuyên suốt.
+    -->
+    <div
+        id="memoryHeartBackdrop"
+        class="memory-heart-backdrop"
+        aria-hidden="true"
+    >
+        <div class="big-heart memory-persistent-heart"></div>
+    </div>
+
+    <!-- Hiệu ứng mở một thư mục: trái tim lớn xuất hiện rồi nổ tung -->
+    <div
+        id="albumBurstTransition"
+        class="transition-overlay album-burst-overlay"
+        aria-hidden="true"
+    >
+        <div class="album-burst-heart-shell">
+            <div class="album-burst-heart"></div>
+        </div>
+
+        <span class="album-burst-ring album-burst-ring-1"></span>
+        <span class="album-burst-ring album-burst-ring-2"></span>
+        <span class="album-burst-flash"></span>
+
+        <span class="album-burst-piece burst-piece-1">♥</span>
+        <span class="album-burst-piece burst-piece-2">♥</span>
+        <span class="album-burst-piece burst-piece-3">♥</span>
+        <span class="album-burst-piece burst-piece-4">♥</span>
+        <span class="album-burst-piece burst-piece-5">♥</span>
+        <span class="album-burst-piece burst-piece-6">♥</span>
+        <span class="album-burst-piece burst-piece-7">♥</span>
+        <span class="album-burst-piece burst-piece-8">♥</span>
+        <span class="album-burst-piece burst-piece-9">♥</span>
+        <span class="album-burst-piece burst-piece-10">♥</span>
+        <span class="album-burst-piece burst-piece-11">♥</span>
+        <span class="album-burst-piece burst-piece-12">♥</span>
+    </div>
+
     <!-- Hiệu ứng chuyển từ màn hình số ngày sang màn hình "Em" -->
     <div
         id="heartFlyTransition"
@@ -128,7 +169,7 @@
                 </h2>
 
                 <div class="photo-slot together-photo">
-                    <img src="a2.jpg" alt="First promise" title="First promise đóooo">
+                    <img src="18_7/a2.jpg" alt="First promise" title="First promise đóooo">
                 </div>
 
                 <button
@@ -142,41 +183,23 @@
         </section>
 
         <!-- =====================================================
-             MÀN HÌNH 3: EM + 5 ẢNH TRÊN VIỀN TRÁI TIM
+             MÀN HÌNH 3: EM — DANH SÁCH THƯ MỤC
              ===================================================== -->
-        <section id="herScreen" class="screen gallery-screen her-screen">
-            <div class="gallery-content">
+        <section
+            id="herScreen"
+            class="screen gallery-screen her-screen folder-screen"
+        >
+            <div class="folder-screen-content">
                 <h2 class="gallery-title">Em</h2>
 
-                <div class="heart-gallery her-gallery">
-
-                    <div class="gallery-heart-center">
-                        <div class="big-heart gallery-heart her-heart"></div>
-                    </div>
-
-                    <div class="photo-slot gallery-photo her-photo-1">
-                        <img src="dautien.jpg" alt="Ảnh em " title="Ảnh em đầu tiên gửi anhhh">
-                    </div>
-
-                    <div class="photo-slot gallery-photo her-photo-2">
-                        <img src="662d5db2-2256-4461-bcf0-db515085192f.jpg" alt="Ảnh em" title="Ẻm bị chụp lénnn">
-                    </div>
-
-                    <div class="photo-slot gallery-photo her-photo-3">
-                        <img src="a4.jpg" alt="Ảnh em" title="Móc khóa tui tặng ẻm nèee">
-                    </div>
-
-                    <div class="photo-slot gallery-photo her-photo-4">
-                        <img src="cd3a08f2-8665-4221-a104-dbedc797b037.jpg" alt="Ảnh em" title="Lần đầu ẻm đeo kínhhh">
-                    </div>
-
-                    <div class="photo-slot gallery-photo her-photo-5">
-                        <img src="cf243f04-c26e-475d-adb8-ab019002cf00.jpg" alt="Ảnh em" title="Em và hoa">
-                    </div>
-                </div>
+                <!-- Folder được tạo tự động từ albums.js -->
+                <div
+                    id="herFolderGrid"
+                    class="album-folder-grid"
+                ></div>
 
                 <button
-                    class="love-button next-button gallery-next-button"
+                    class="love-button next-button folder-next-button"
                     type="button"
                     onclick="showUsScreen()"
                 >
@@ -186,60 +209,107 @@
         </section>
 
         <!-- =====================================================
-             MÀN HÌNH 4: TÔI VÀ EM + 8 ẢNH
+             MÀN HÌNH 4: TÔI VÀ EM — DANH SÁCH THƯ MỤC
              ===================================================== -->
-        <section id="usScreen" class="screen gallery-screen us-screen">
-            <div class="gallery-content">
+        <section
+            id="usScreen"
+            class="screen gallery-screen us-screen folder-screen"
+        >
+            <div class="folder-screen-content">
                 <h2 class="gallery-title us-title">Tôi và em</h2>
 
-                <div class="heart-gallery us-gallery">
-
-                    <div class="gallery-heart-center">
-                        <div class="big-heart gallery-heart us-heart"></div>
-                    </div>
-
-
-                    <div class="photo-slot gallery-photo us-photo-1">
-                        <img src="a3.jpg" alt="Ảnh chung" title="First date sau tỏ tình nèee">
-                    </div>
-
-                    <div class="photo-slot gallery-photo us-photo-2">
-                        <img src="209292cf-4794-440d-9819-57fc24f0d7cf.jpg" alt="Ảnh chung" title="Hun nèee">
-                    </div>
-
-                    <div class="photo-slot gallery-photo us-photo-3">
-                        <img src="44c5f015-5ad0-41f0-a0a7-5d3019af51b7.jpg" alt="Ảnh chung" title="Ẻm nựng tuiii">
-                    </div>
-
-                    <div class="photo-slot gallery-photo us-photo-4">
-                        <img src="9b5c0d5e-723a-4a5e-8824-6b41436fcfe7.jpg" alt="Ảnh chung" title="Bĩu môi nèee">
-                    </div>
-
-                    <div class="photo-slot gallery-photo us-photo-5">
-                        <img src="23e54505-8c1c-465c-ba86-832a3fc9edaf.jpg" alt="Ảnh chung" title="Ẻm công khai tuiii">
-                    </div>
-
-                    <div class="photo-slot gallery-photo us-photo-6">
-                        <img src="5c88f73f-479a-4f81-885c-f7e18bc9d49d.jpg" alt="Ảnh chung" title="2 con Ma Kết chu mỏ">
-                    </div>
-
-                    <div class="photo-slot gallery-photo us-photo-7">
-                        <img src="8138ba08-a590-46f3-830a-bc1590fd887f.jpg" alt="Ảnh chung" title="Nhéo má nèee">
-                    </div>
-
-                    <div class="photo-slot gallery-photo us-photo-8">
-                        <img src="5963f45f-7cfc-426f-ae60-af5099c9a7ec.jpg" alt="Ảnh chung" title="Ăng nhăng nhănggg">
-                    </div>
-                </div>
+                <!-- Folder được tạo tự động từ albums.js -->
+                <div
+                    id="usFolderGrid"
+                    class="album-folder-grid"
+                ></div>
 
                 <button
-                    class="love-button final-message-button"
+                    class="love-button final-message-button folder-message-button"
                     type="button"
                     onclick="openLoveMessage()"
                 >
                     Mở lời nhắn 💌
                 </button>
+            </div>
+        </section>
 
+        <!-- =====================================================
+             MÀN HÌNH ALBUM DÙNG CHUNG CHO CẢ "EM" VÀ "TÔI VÀ EM"
+             Ảnh được render tự động từ albums.js.
+             ===================================================== -->
+        <section
+            id="albumScreen"
+            class="screen album-screen"
+        >
+            <div class="album-view">
+
+                <div class="album-view-topbar">
+                    <button
+                        class="album-back-button"
+                        type="button"
+                        onclick="closeAlbum()"
+                    >
+                        ← Thư mục
+                    </button>
+
+                    <h2
+                        id="albumViewTitle"
+                        class="album-view-title"
+                    >
+                        Album
+                    </h2>
+                </div>
+
+                <!--
+                    Trái tim không nằm trong block này.
+                    Nó là #memoryHeartBackdrop ở ngoài main,
+                    nên trái tim không bị reset khi đổi folder.
+                -->
+                <div
+                    id="albumPhotoStage"
+                    class="album-photo-stage"
+                ></div>
+
+                <p
+                    id="albumEmptyState"
+                    class="album-empty-state"
+                    hidden
+                >
+                    Thư mục này chưa có ảnh nè ❤️
+                </p>
+
+                <nav
+                    id="albumPagination"
+                    class="album-pagination"
+                    aria-label="Phân trang ảnh trong album"
+                    hidden
+                >
+                    <button
+                        id="albumPrevButton"
+                        class="album-page-button"
+                        type="button"
+                        onclick="changeAlbumPage(-1)"
+                    >
+                        ← Cũ hơn
+                    </button>
+
+                    <span
+                        id="albumPageCounter"
+                        class="album-page-counter"
+                    >
+                        1 / 1
+                    </span>
+
+                    <button
+                        id="albumNextButton"
+                        class="album-page-button"
+                        type="button"
+                        onclick="changeAlbumPage(1)"
+                    >
+                        Tiếp theo →
+                    </button>
+                </nav>
             </div>
         </section>
 
@@ -319,6 +389,23 @@
                         </div>
                     </section>
                    
+                    <section
+                        class="love-message-page"
+                        data-date="18.09.2026"
+                    >
+                        <div class="love-message-content">
+                            <p>Gửi htrangg của anh,</p>
+
+                            <p>
+                                Một năm có tận 4 mùa nhưng anh chỉ muốn 1 mùa bên em thui 🥺. Dù cho tối đó có mưa tầm tã nhưng em vẫn cho phép anh gặp em.
+                                Một tháng qua tuy có những lần chưa hiểu nhau hay những lần em ốm, những lúc đó anh chỉ mong anh có thể bên em và ôm em thật lâu. Nhân dịp 3 tháng bên nhau, anh mong em giữ gìn sức khỏe thật tốt, luôn khỏe mạnh và hạnh phúc bên anh nhaaaa.
+                            </p>
+
+                            <p class="love-signature">
+                                Anh iu embe nhắmmm, mình mãi bên nhau nhaaa ❤️
+                            </p>
+                        </div>
+                    </section>
 
                 </div>
 
@@ -347,6 +434,8 @@
         </div>
 
     </main>
+
+    <script src="albums.js"></script>
 
     <script>
         let declineClickCount = 0;
@@ -438,8 +527,9 @@
         }
 
         /*
-         * Chuyển sang màn hình "Em":
-         * một trái tim lớn bay ngang qua và che màn hình tại thời điểm đổi nội dung.
+         * Chuyển sang khu vực "Em".
+         * Trái tim trung tâm được bật và từ đây sẽ tiếp tục đập
+         * xuyên suốt các màn hình folder / album.
          */
         function showHerScreen() {
             if (isTransitioning) {
@@ -447,6 +537,8 @@
             }
 
             isTransitioning = true;
+            renderAlbumFolders("her");
+            setMemoryHeartVisible(true);
 
             const overlay =
                 document.getElementById("heartFlyTransition");
@@ -466,8 +558,8 @@
         }
 
         /*
-         * Chuyển sang màn hình cuối:
-         * ánh sáng nở từ giữa trái tim và các trái tim nhỏ bung ra.
+         * Chuyển từ thư mục "Em" sang thư mục "Tôi và em".
+         * Trái tim nền KHÔNG bị tạo lại, vì vậy nhịp đập được giữ liên tục.
          */
         function showUsScreen() {
             if (isTransitioning) {
@@ -475,6 +567,8 @@
             }
 
             isTransitioning = true;
+            renderAlbumFolders("us");
+            setMemoryHeartVisible(true);
 
             const overlay =
                 document.getElementById("bloomTransition");
@@ -492,6 +586,545 @@
                 isTransitioning = false;
             }, 1250);
         }
+
+
+        // =========================================================
+        // ALBUM / FOLDER
+        // =========================================================
+
+        let activeAlbumGroup = null;
+        let activeAlbumIndex = -1;
+
+        function setMemoryHeartVisible(visible) {
+            const heart =
+                document.getElementById("memoryHeartBackdrop");
+
+            if (!heart) {
+                return;
+            }
+
+            heart.classList.toggle("show", visible);
+        }
+
+        function getAlbumGroup(groupName) {
+            if (
+                typeof LOVE_ALBUMS === "undefined" ||
+                !LOVE_ALBUMS[groupName]
+            ) {
+                return [];
+            }
+
+            return LOVE_ALBUMS[groupName];
+        }
+
+        function renderAlbumFolders(groupName) {
+            const gridId =
+                groupName === "her"
+                    ? "herFolderGrid"
+                    : "usFolderGrid";
+
+            const grid = document.getElementById(gridId);
+
+            if (!grid) {
+                return;
+            }
+
+            const albums = getAlbumGroup(groupName);
+            grid.innerHTML = "";
+
+            albums.forEach((album, albumIndex) => {
+                const card = document.createElement("button");
+                card.type = "button";
+                card.className = "album-folder-card";
+
+                card.addEventListener("click", () => {
+                    openAlbum(groupName, albumIndex);
+                });
+
+                const folderVisual = document.createElement("span");
+                folderVisual.className = "album-folder-visual";
+
+                const coverSrc =
+                    album.cover ||
+                    album.photos?.[0]?.src ||
+                    "";
+
+                if (coverSrc) {
+                    const cover = document.createElement("img");
+                    cover.src = coverSrc;
+                    cover.alt = "";
+                    cover.className = "album-folder-cover";
+                    folderVisual.appendChild(cover);
+                }
+
+                const heart = document.createElement("span");
+                heart.className = "album-folder-heart";
+                heart.textContent = "♥";
+                folderVisual.appendChild(heart);
+
+                const name = document.createElement("span");
+                name.className = "album-folder-name";
+                name.textContent =
+                    album.name || `Thư mục ${albumIndex + 1}`;
+
+                const count = document.createElement("span");
+                count.className = "album-folder-count";
+
+                const photoCount =
+                    Array.isArray(album.photos)
+                        ? album.photos.length
+                        : 0;
+
+                count.textContent =
+                    `${photoCount} ảnh`;
+
+                card.append(
+                    folderVisual,
+                    name,
+                    count
+                );
+
+                grid.appendChild(card);
+            });
+        }
+
+        function openAlbum(groupName, albumIndex) {
+            if (isTransitioning) {
+                return;
+            }
+
+            const albums = getAlbumGroup(groupName);
+            const album = albums[albumIndex];
+
+            if (!album) {
+                return;
+            }
+
+            activeAlbumGroup = groupName;
+            activeAlbumIndex = albumIndex;
+
+            renderCurrentAlbum();
+
+            const currentScreenId =
+                groupName === "her"
+                    ? "herScreen"
+                    : "usScreen";
+
+            const burstOverlay =
+                document.getElementById("albumBurstTransition");
+
+            if (!burstOverlay) {
+                activateScreen(currentScreenId, "albumScreen");
+                return;
+            }
+
+            isTransitioning = true;
+
+            burstOverlay.classList.remove("play");
+            void burstOverlay.offsetWidth;
+            burstOverlay.classList.add("play");
+
+            /*
+             * Lúc trái tim đạt kích thước lớn nhất,
+             * đổi sang nội dung album ở phía sau.
+             */
+            setTimeout(() => {
+                activateScreen(
+                    currentScreenId,
+                    "albumScreen"
+                );
+            }, 690);
+
+            setTimeout(() => {
+                burstOverlay.classList.remove("play");
+                isTransitioning = false;
+            }, 1500);
+        }
+
+        function closeAlbum() {
+            if (isTransitioning) {
+                return;
+            }
+
+            const targetScreenId =
+                activeAlbumGroup === "us"
+                    ? "usScreen"
+                    : "herScreen";
+
+            const albumScreen =
+                document.getElementById("albumScreen");
+
+            const targetScreen =
+                document.getElementById(targetScreenId);
+
+            if (!albumScreen || !targetScreen) {
+                return;
+            }
+
+            albumScreen.classList.add("album-closing");
+
+            setTimeout(() => {
+                albumScreen.classList.remove(
+                    "active",
+                    "album-closing"
+                );
+
+                targetScreen.classList.add("active");
+            }, 330);
+        }
+
+        function getActiveAlbum() {
+            const albums =
+                getAlbumGroup(activeAlbumGroup);
+
+            return albums[activeAlbumIndex] || null;
+        }
+
+        function normalizeAlbumPhoto(photo) {
+            /*
+             * albums.js hỗ trợ cả 2 kiểu:
+             *
+             * "images/anh1.jpg"
+             *
+             * hoặc:
+             * {
+             *     src: "images/anh1.jpg",
+             *     title: "Chú thích"
+             * }
+             */
+            if (typeof photo === "string") {
+                return {
+                    src: photo,
+                    title: "",
+                    alt: ""
+                };
+            }
+
+            return {
+                src: photo?.src || "",
+                title: photo?.title || "",
+                alt: photo?.alt || ""
+            };
+        }
+
+        function getAlbumLayoutMetrics(photoCount) {
+            const isMobile =
+                window.innerWidth <= 760;
+
+            const viewportWidth =
+                window.innerWidth;
+
+            const viewportHeight =
+                window.innerHeight;
+
+            /*
+             * Vòng ellipse dùng CHUNG TÂM với trái tim.
+             * Ảnh sẽ chạy xung quanh trái tim chứ không dùng
+             * các vị trí % rời rạc như bản trước.
+             */
+            const radiusX = isMobile
+                ? Math.min(
+                    viewportWidth * 0.34,
+                    150
+                )
+                : Math.min(
+                    viewportWidth * 0.31,
+                    335
+                );
+
+            const radiusY = isMobile
+                ? Math.min(
+                    viewportHeight * 0.235,
+                    180
+                )
+                : Math.min(
+                    viewportHeight * 0.31,
+                    285
+                );
+
+            /*
+             * Tự thu nhỏ ảnh khi số lượng tăng.
+             * Không còn giới hạn 8 ảnh / trang.
+             */
+            const circumference =
+                2 * Math.PI *
+                Math.sqrt(
+                    (
+                        radiusX * radiusX +
+                        radiusY * radiusY
+                    ) / 2
+                );
+
+            const spacing =
+                circumference /
+                Math.max(photoCount, 1);
+
+            const maxPhotoSize =
+                isMobile ? 94 : 150;
+
+            const minPhotoSize =
+                isMobile ? 48 : 62;
+
+            const photoSize = Math.max(
+                minPhotoSize,
+                Math.min(
+                    maxPhotoSize,
+                    spacing * 0.61
+                )
+            );
+
+            return {
+                radiusX,
+                radiusY,
+                photoSize
+            };
+        }
+
+        function positionAlbumPhotos() {
+            const stage =
+                document.getElementById(
+                    "albumPhotoStage"
+                );
+
+            if (!stage) {
+                return;
+            }
+
+            const photoSlots =
+                Array.from(
+                    stage.querySelectorAll(
+                        ".album-photo"
+                    )
+                );
+
+            const photoCount =
+                photoSlots.length;
+
+            if (photoCount === 0) {
+                return;
+            }
+
+            const {
+                radiusX,
+                radiusY,
+                photoSize
+            } = getAlbumLayoutMetrics(
+                photoCount
+            );
+
+            stage.style.setProperty(
+                "--album-photo-size",
+                `${photoSize}px`
+            );
+
+            /*
+             * Bắt đầu từ đỉnh vòng ellipse.
+             * Tất cả ảnh chia đều 360 độ.
+             */
+            photoSlots.forEach(
+                (photoSlot, index) => {
+                    const angle =
+                        -Math.PI / 2 +
+                        (
+                            2 *
+                            Math.PI *
+                            index
+                        ) /
+                        photoCount;
+
+                    const x =
+                        Math.cos(angle) *
+                        radiusX;
+
+                    const y =
+                        Math.sin(angle) *
+                        radiusY;
+
+                    /*
+                     * Nghiêng nhẹ theo vị trí,
+                     * nhưng giới hạn để bố cục không bị loạn.
+                     */
+                    const rotation =
+                        Math.sin(angle) * 5;
+
+                    photoSlot.style.setProperty(
+                        "--orbit-x",
+                        `${x.toFixed(2)}px`
+                    );
+
+                    photoSlot.style.setProperty(
+                        "--orbit-y",
+                        `${y.toFixed(2)}px`
+                    );
+
+                    photoSlot.style.setProperty(
+                        "--album-photo-rotation",
+                        `${rotation.toFixed(2)}deg`
+                    );
+                }
+            );
+        }
+
+        function renderCurrentAlbum() {
+            const album =
+                getActiveAlbum();
+
+            if (!album) {
+                return;
+            }
+
+            const title =
+                document.getElementById(
+                    "albumViewTitle"
+                );
+
+            const stage =
+                document.getElementById(
+                    "albumPhotoStage"
+                );
+
+            const emptyState =
+                document.getElementById(
+                    "albumEmptyState"
+                );
+
+            if (title) {
+                title.textContent =
+                    album.name || "Album";
+            }
+
+            const photos =
+                Array.isArray(album.photos)
+                    ? album.photos
+                    : [];
+
+            if (stage) {
+                stage.innerHTML = "";
+            }
+
+            if (emptyState) {
+                emptyState.hidden =
+                    photos.length !== 0;
+            }
+
+            if (
+                photos.length === 0 ||
+                !stage
+            ) {
+                return;
+            }
+
+            photos.forEach(
+                (rawPhoto, index) => {
+                    const photo =
+                        normalizeAlbumPhoto(
+                            rawPhoto
+                        );
+
+                    if (!photo.src) {
+                        return;
+                    }
+
+                    const photoSlot =
+                        document.createElement(
+                            "div"
+                        );
+
+                    photoSlot.className =
+                        "photo-slot album-photo";
+
+                    photoSlot.style.setProperty(
+                        "--album-photo-delay",
+                        `${Math.min(
+                            0.05 +
+                            index * 0.045,
+                            0.55
+                        )}s`
+                    );
+
+                    const image =
+                        document.createElement(
+                            "img"
+                        );
+
+                    image.src =
+                        photo.src;
+
+                    image.alt =
+                        photo.alt ||
+                        album.name ||
+                        "Ảnh kỷ niệm";
+
+                    if (photo.title) {
+                        image.title =
+                            photo.title;
+                    }
+
+                    image.addEventListener(
+                        "load",
+                        () => {
+                            const ratio =
+                                image.naturalWidth /
+                                image.naturalHeight;
+
+                            if (ratio >= 1.18) {
+                                photoSlot.classList.add(
+                                    "album-photo-landscape"
+                                );
+                            } else if (
+                                ratio <= 0.78
+                            ) {
+                                photoSlot.classList.add(
+                                    "album-photo-portrait"
+                                );
+                            } else {
+                                photoSlot.classList.add(
+                                    "album-photo-square"
+                                );
+                            }
+                        }
+                    );
+
+                    photoSlot.appendChild(
+                        image
+                    );
+
+                    stage.appendChild(
+                        photoSlot
+                    );
+                }
+            );
+
+            /*
+             * Chờ browser tạo DOM xong rồi mới tính vòng ảnh.
+             */
+            requestAnimationFrame(
+                positionAlbumPhotos
+            );
+        }
+
+        /*
+         * Khi resize trình duyệt, vòng ảnh tự tính lại.
+         * Không cần sửa tay CSS.
+         */
+        window.addEventListener(
+            "resize",
+            () => {
+                const albumScreen =
+                    document.getElementById(
+                        "albumScreen"
+                    );
+
+                if (
+                    albumScreen &&
+                    albumScreen.classList.contains(
+                        "active"
+                    )
+                ) {
+                    positionAlbumPhotos();
+                }
+            }
+        );
 
         function handleDecline() {
             const declineButton =
@@ -672,6 +1305,10 @@
                 rainLayer.remove();
             }, 2600);
         }
+
+        // Render sẵn folder để lần đầu mở màn hình không bị trễ.
+        renderAlbumFolders("her");
+        renderAlbumFolders("us");
 
         createWelcomeHeartRain();
 
