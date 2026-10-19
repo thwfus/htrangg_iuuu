@@ -277,8 +277,8 @@ const LOVE_ALBUMS = {
                     title: "Này thì ảnh 1 lần"
                 },
                 {
-                    src: "18_10/4705a2ee-ca8d-4378-a051-7a09f20ced2b.jpg",
-                    title: "Bé định ăng anh 🥺"
+                    src: "18_10/coiphim.jpg",
+                    title: "Đi coi phim vứi nhauuu"
                 },
                 {
                     src: "18_10/f6bcdbb1-f48b-44da-a848-c33ccb34e6d4.jpg",
