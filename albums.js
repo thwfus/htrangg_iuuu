@@ -137,6 +137,28 @@ const LOVE_ALBUMS = {
                     title: "xinh iuuuu"
                 }
             ]
+        },
+        {
+            name: "4 tháng bên nhauuu",
+            cover: "",
+            photos: [
+                {
+                    src: "18_10/22927ff2-c591-4f24-b1c0-5267248dd2a2.jpg",
+                    title: "Ẻm hồi nhỏ nèeeeee",
+                },
+                {
+                    src: "18_10/1ec77959-8505-4877-ab13-b60b1d943445.jpg",
+                    title: "Bén vcl",
+                },
+                {
+                    src: "18_10/acc1e166-f7b4-4311-bdf2-c3fa2eedcc9a.jpg",
+                    title: "Nhìn mà mún hun sưng môi sưng má waaaaa",
+                },
+                {
+                    src: "18_10/75dfecb1-ee1b-4b60-95cb-0a592ff740f1.jpg",
+                    title: "Hoa của hoa",
+                }
+            ]
         }
     ],
 
@@ -239,6 +261,29 @@ const LOVE_ALBUMS = {
                     src: "18_9/63e3066d-8154-4592-903f-b9ab573088ff.jpg",
                     title: "Cười tươi wa iiii"
                 },
+            ]
+        },
+
+        {
+            name: "4 tháng bên nhauuu",
+            cover: "18_10/38506800-c3c2-4db1-8739-46fda4092f5d.jpg",
+            photos: [
+                {
+                    src: "18_10/38506800-c3c2-4db1-8739-46fda4092f5d.jpg",
+                    title: "Đi học online???"
+                },
+                {
+                    src: "18_10/048b750f-9188-42ec-ac0f-fa3a82d046e1.jpg",
+                    title: "Này thì ảnh 1 lần"
+                },
+                {
+                    src: "18_10/4705a2ee-ca8d-4378-a051-7a09f20ced2b.jpg",
+                    title: "Bé định ăng anh 🥺"
+                },
+                {
+                    src: "18_10/f6bcdbb1-f48b-44da-a848-c33ccb34e6d4.jpg",
+                    title: "Gái alime hõ"
+                }
             ]
         }
     ]
